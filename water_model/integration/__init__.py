@@ -1,0 +1,1 @@
+"""Intégration du WaterScore dans le scoring GreenDC."""

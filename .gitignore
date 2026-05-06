@@ -1,0 +1,29 @@
+# Donnees lourdes
+*.nc
+*.tif
+*.tiff
+*.shp
+*.shx
+*.dbf
+*.gpkg
+*.zip
+*.gdb/
+data/raw/
+water_model/data/raw/
+water_model/data/Aqueduct40_*/
+*.parquet
+
+# Python
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+
+# Reference BDLISA QGIS (symbologie, non utilisee par le code)
+water_model/data/BDLISA_V3_*/
+
+# Reference BDLISA QGIS (symbologie, non utilisee par le code)
+water_model/data/BDLISA_V3_*/

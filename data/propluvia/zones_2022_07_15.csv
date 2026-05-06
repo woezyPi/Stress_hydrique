@@ -1,0 +1,1111 @@
+zone_id,zone_nom,code_dept,niveau_text,niveau_int,communes,n_communes
+8788,Saône Aval,01,alerte,2,[],1
+8789,Rivières de Bresse,01,alerte,2,[],1
+8790,Rivières du Bugey,01,alerte,2,[],1
+8791,Rivières de Dombes,01,alerte,2,[],1
+8792,Rivières du Haut-Rhône,01,alerte,2,[],1
+9368,Saône Aval,01,alerte,2,[],1
+9370,Plaine de l'Ain,01,alerte,2,[],1
+9371,Dombes - Certines - Nord,01,vigilance,1,[],1
+9372,Dombes - Sud,01,alerte_renforcee,3,[],1
+10093,bassin du Petit Morin,02,alerte,2,,0
+10097,bassin de l'Oise Moyenne et Ailette,02,vigilance,1,,0
+10102,bassin de l'Escaut,02,vigilance,1,,0
+8296,Bassin versant de l'Asse,04,alerte,2,[],1
+8297,Bassin versant de la Bleone,04,vigilance,1,[],1
+8298,Bassin versant du Colostre,04,alerte,2,[],1
+8299,Bassin versant du Jabron,04,vigilance,1,[],1
+8300,Bassin versant du Largue,04,alerte_renforcee,3,[],1
+8301,Bassin versant du Lauzon,04,alerte,2,[],1
+8302,Bassin versant du Sasse,04,vigilance,1,[],1
+8303,Bassin versant du Vancon,04,vigilance,1,[],1
+8304,Bassin versant de l'Ubaye,04,vigilance,1,[],1
+8305,Bassin versant du Verdon amont,04,vigilance,1,[],1
+8306,Bassin versant du Var (partie dpt Alpes-de-Haute-Provence),04,alerte,2,[],1
+8307,Bassin versant de la Blanche,04,vigilance,1,[],1
+8308,Bassin versant du Calavon (partie dpt Alpes-de-Haute-Provence),04,alerte_renforcee,3,[],1
+8309,Bassin versant de la Nesque (partie dpt Alpes-de-Haute-Provence),04,alerte_renforcee,3,[],1
+8310,Bassin versant du Buech (partie dpt Alpes-de-Haute-Provence),04,alerte_renforcee,3,[],1
+8311,Bassin versant de l'Artuby (partie dpt Alpes-de-Haute-Provence),04,alerte_renforcee,3,[],1
+8312,Bassin versant du Verdon aval,04,vigilance,1,[],1
+8313,Bassin versant de la Durance,04,vigilance,1,[],1
+8920,Bassin du Drac-Gapençais,05,alerte,2,[],1
+8921,Bassin du Buëch partie du 05,05,alerte_renforcee,3,[],1
+8922,Bassin Méouge partie 05,05,alerte_renforcee,3,[],1
+8924,Bassin Moyenne Durance Amont partie 05,05,alerte,2,[],1
+8925,Bassin de la Haute-Durance,05,alerte,2,[],1
+8926,Bassin Souloise-Séveraisse,05,vigilance,1,[],1
+8927,Bassin Haute-Romanche,05,vigilance,1,[],1
+8316,"Zone Aygues et Oule (Aygues, partie dpt Hautes-Alpes)",05,alerte,2,,0
+8923,Bassin E(A)ygues partie 05,05,alerte_renforcee,3,,0
+8318,Zone 1 : Artuby (partie dpt Alpes-Maritimes),06,crise,4,[],1
+8319,Zone 2 : Siagne amont (partie dpt Alpes-Martiimes),06,alerte_renforcee,3,[],1
+8320,Zone 3 : Siagne aval (partie dpt Alpes-Maritimes),06,vigilance,1,[],1
+8321,Zone 4 : Loup et Cagne,06,alerte_renforcee,3,[],1
+8322,Zone 5 : la Brague,06,crise,4,[],1
+8323,Zone 6 : Esteron,06,crise,4,[],1
+8324,Zone 7 : Var amont (partie dpt Alpes-Maritimes),06,alerte_renforcee,3,[],1
+8325,Zone 8 : Var aval,06,alerte_renforcee,3,[],1
+8326,Zone 9 : Paillon,06,crise,4,[],1
+8327,Zone 10 : Roya/Bevera et mentonnais,06,alerte_renforcee,3,[],1
+9444,Allier,07,alerte,2,[],1
+9445,Ardèche,07,alerte,2,[],1
+9446,Beaume-Chassezac,07,alerte_renforcee,3,[],1
+9447,Cance,07,alerte_renforcee,3,[],1
+9448,Cèze,07,alerte_renforcee,3,[],1
+9449,Doux,07,alerte_renforcee,3,[],1
+9450,Eyrieux,07,alerte_renforcee,3,[],1
+9451,Loire,07,alerte,2,[],1
+9452,Ouvèze,07,alerte_renforcee,3,[],1
+7524,Craie de Champagne Nord (partie 08),08,alerte,2,,0
+7525,Calcaires de l'Oxfordien,08,alerte_renforcee,3,,0
+9771,Craie de Champagne Nord,08,alerte,2,,0
+9790,Affluents crayeux Aube et Seine,10,alerte,2,[],1
+9794,Seine en amont de la restitution du réservoir,10,alerte,2,[],1
+9796,Vanne,10,alerte,2,,0
+8420,Nappe astienne (partie dpt11),11,vigilance,1,[],1
+8421,Nappes plioquaternaires de la plaine du roussillon (partie dpt11),11,alerte,2,[],1
+8461,Aude amont hors axe réalimenté,11,alerte,2,[],1
+8462,Bassin versant de l'Agly (partie dpt11),11,vigilance,1,[],1
+8463,Bassin versant de l'Hers Vif (y compris Vixiège),11,vigilance,1,[],1
+8464,Bassin versant de l'Hers Mort,11,alerte_renforcee,3,[],1
+8465,Aude aval -  Berre et Rieu - hors axe réalimenté et canaux VNF,11,alerte,2,[],1
+8466,Secteur Argent-Double/Ognon (partie dpt 11) et affluents rive gauche de l’Aude sur ce secteur,11,alerte,2,[],1
+8467,Secteur Orbieu et affluents rive droite de l’Aude sur ce secteur,11,alerte,2,[],1
+8468,Secteur Orbiel et affluents rive gauche de l’Aude sur ce secteur,11,alerte,2,[],1
+8469,Cesse (partie dpt 11) et affluents rive gauche de l’Aude sur ce secteur,11,alerte,2,[],1
+8470,Axe réalimenté Aude amont,11,alerte,2,[],1
+8471,Axe réalimenté Aude médiane et aval et canaux VNF,11,alerte,2,[],1
+8472,Bassin versant du Fresquel,11,alerte,2,[],1
+8473,bassin versant du Thoré,11,vigilance,1,[],1
+8474,bassin versant du Sor,11,vigilance,1,[],1
+7618,Bassin de la DIEGE,12,alerte,2,[],1
+7619,Bassin de l'AVEYRON de la confluence avec la SERRE à la confluence avec le RIOU NEGRE,12,alerte,2,[],1
+7620,Bassin de l'AVEYRON de la limite du département à la confluence avec la SERRE,12,alerte,2,[],1
+7621,Bassin de l'ALZOU,12,alerte,2,[],1
+7622,Bassin de la SERENES,12,alerte,2,[],1
+7623,Bassin du DOURDOU DE CONQUES,12,alerte,2,[],1
+7624,Bassin de la Rivière LOT de la limite Est du département jusqu'à la confluence avec la Truyère hors,12,vigilance,1,[],1
+7625,Bassin du RANCE,12,alerte,2,[],1
+7626,Bassin du DOURDOU DE CAMARES en amont de la confluence avec la SORGUES et du LEN,12,alerte_renforcee,3,[],1
+7627,Bassin du DOURDOU DE CAMARES en aval de la confluence avec la SORGUES et Sorgues  (hors LEN),12,alerte_renforcee,3,[],1
+7628,Bassin du DOURDOU DE CAMARES en amont de la confluence avec la SORGUES et du LEN,12,alerte_renforcee,3,[],1
+7636,Bassin versant de l'Orb en Aveyron,12,vigilance,1,[],1
+7637,Bassin versant de l'Hérault en Aveyron,12,alerte,2,[],1
+8328,Secteur SG1 : Rhone Camargue,13,vigilance,1,[],1
+8329,Secteur SG2a : Durance (elargi aux bassins versants ouest et nord Alpilles),13,alerte,2,[],1
+8330,Secteur SG2b : Real de Jouques (partie dpt Bouches-du-Rhone),13,crise,4,[],1
+8331,Secteur SG3 : Crau,13,alerte,2,[],1
+8332,Secteur SG3a : Crau Alpilles,13,alerte,2,[],1
+8333,Secteur SG4a : Littoral Ouest Marseille (y compris Cadiere et Aygalades),13,alerte,2,[],1
+8334,Secteur SG4b : Littoral Est Marseille (y compris le polje de Cuges les Pins),13,alerte,2,[],1
+8335,Secteur SG5a : Touloubre amont,13,alerte,2,[],1
+8336,Secteur SG5b : Touloubre aval (y compris la Durancole),13,alerte,2,[],1
+8337,Secteur SG6a : Arc amont (partie dpt Bouches-du-Rhone),13,alerte_renforcee,3,[],1
+8338,Secteur SG6b : Arc aval,13,alerte,2,[],1
+8339,Secteur SG7a : Huveaune amont (partie dpt Bouches-du-Rhone),13,crise,4,[],1
+8340,Secteur SG7b : Huveaune aval,13,crise,4,[],1
+9772,AURE,14,vigilance,1,[],1
+9773,VIRE AMONT,14,alerte,2,[],1
+9774,SEULLES,14,vigilance,1,[],1
+9775,ORNE,14,vigilance,1,[],1
+9776,DIVES,14,vigilance,1,[],1
+9777,TOUQUES,14,vigilance,1,[],1
+8707,Ander-Margeride,15,alerte,2,[],1
+8708,Aubrac,15,crise,4,[],1
+8709,Cère,15,vigilance,1,[],1
+8710,Maronne,15,vigilance,1,[],1
+8711,Sumène,15,vigilance,1,[],1
+8712,Truyère_aval,15,vigilance,1,[],1
+8713,Haut-Allier,15,alerte,2,[],1
+8714,Alagnon,15,alerte,2,[],1
+8715,Rhue,15,vigilance,1,[],1
+8716,Célé,15,vigilance,1,[],1
+9152,OUGC Isle-Dronne /  Zone d'alerte : L'Auzonne,16,alerte_renforcee,3,[],1
+9156,OUGC Isle-Dronne /  Zone d'alerte : La Tude,16,crise,4,[],1
+9157,"OUGC Isle-Dronne /  Zone d'alerte : Lary, Pousonne, Palais",16,alerte_renforcee,3,[],1
+9159,OUGC Karst /  Zone d'alerte : Bandiat,16,alerte,2,[],1
+9160,OUGC Karst /  Zone d'alerte : Bonnieure,16,alerte,2,[],1
+9162,OUGC Karst /  Zone d'alerte : Échelle-Lèche,16,alerte,2,[],1
+9163,OUGC Karst /  Zone d'alerte : Tardoire,16,alerte,2,[],1
+9165,OUGC Saintonge /  Zone d'alerte : L'Antenne,16,alerte,2,[],1
+9173,OUGC Cogesteau /  Zone d'alerte : Auge,16,alerte,2,[],1
+9175,OUGC Cogesteau /  Zone d'alerte : Bief,16,alerte,2,[],1
+9177,OUGC Cogesteau /  Zone d'alerte : Charente-Moyenne,16,alerte,2,[],1
+9178,OUGC Cogesteau /  Zone d'alerte : Né,16,alerte_renforcee,3,[],1
+9183,OUGC Saintonge /  Zone d'alerte : Seugne,16,alerte,2,[],1
+9169,OUGC Clain /  Zone d'alerte : Clain-Amont,16,crise,4,,0
+6903,Hors ZRE,17,alerte,2,[],1
+6904,Bassin du Curé - Sèvre Niortaise,17,alerte_renforcee,3,[],1
+6905,Bassin du Né,17,alerte,2,[],1
+6906,Bassin de l'Arnoult,17,alerte,2,[],1
+6907,Bassin des Fleuves côtiers de Gironde,17,alerte,2,[],1
+6908,Bassin de Lary-Palais,17,alerte,2,[],1
+6909,Bassin de la Dronne aval,17,alerte,2,[],1
+6910,Bassin du Bruant,17,alerte,2,[],1
+6911,Bassin de la Gères-Devise,17,alerte,2,[],1
+6912,Bassin Le Mignon,17,alerte_renforcee,3,[],1
+6913,Bassin de la Boutonne aval et moyenne,17,alerte,2,[],1
+6914,Bassin de l'Antenne-Rouzille,17,alerte,2,[],1
+6915,Bassin de la Seudre aval,17,alerte,2,[],1
+6916,Bassin de la Seudre moyenne,17,alerte,2,[],1
+6917,Bassin de la Seudre amont,17,alerte,2,[],1
+6918,Bassin de l'Aume-Couture,17,alerte,2,[],1
+6919,Bassin de Charente-aval,17,alerte,2,[],1
+6920,Bassin de la Seugne,17,alerte,2,[],1
+9453,Bassin de l'Arnon amont,18,alerte_renforcee,3,[],1
+9454,Bassin de l'Arnon aval,18,alerte_renforcee,3,[],1
+9455,Bassin de l'Aubois,18,alerte,2,[],1
+9456,"Bassin de l'Auron, de l'Airain et des Rampennes",18,vigilance,1,[],1
+9457,Bassin du Cher,18,vigilance,1,[],1
+9458,"Bassin du Colin, de l'Ouatier et du Langis",18,vigilance,1,[],1
+9459,Bassin du Fouzon,18,vigilance,1,[],1
+9460,Bassin de la Grande Sauldre et du Beuvron,18,vigilance,1,[],1
+9461,Bassin de l'Indre amont,18,crise,4,[],1
+9462,Bassin de la Loire et de ses affluents,18,vigilance,1,[],1
+9463,Bassin de la Petite Sauldre et de la Rère,18,vigilance,1,[],1
+9464,Bassin de la Théols,18,vigilance,1,[],1
+9465,Bassin de la Vauvise,18,vigilance,1,[],1
+9466,Bassin de l'Yèvre amont,18,vigilance,1,[],1
+9467,Bassin de l'Yèvre aval,18,vigilance,1,[],1
+9468,zone Auvézère,19,vigilance,1,[],1
+9469,zone Corrèze amont,19,vigilance,1,[],1
+9470,zone Corrèze aval,19,vigilance,1,[],1
+9471,zone Dordogne amont,19,vigilance,1,[],1
+9472,zone Dordogne aval,19,vigilance,1,[],1
+9473,zone Vézère amont,19,vigilance,1,[],1
+9474,zone Vézère aval,19,vigilance,1,[],1
+9475,zone Vienne,19,vigilance,1,[],1
+9476,zone Xaintrie,19,vigilance,1,[],1
+9354,Saône moyenne,21,alerte,2,[],1
+9355,Tille amont,21,alerte_renforcee,3,[],1
+9356,Vingeanne,21,vigilance,1,[],1
+9357,Bèze,21,alerte,2,[],1
+9358,Tille aval,21,alerte,2,[],1
+9359,"Vouge, Biètre, Cent-Fonts",21,alerte,2,[],1
+9360,Bouzaise,21,alerte,2,[],1
+9361,Dheune,21,alerte,2,[],1
+9362,Ouche amont,21,vigilance,1,[],1
+9363,Ouche aval,21,vigilance,1,[],1
+9364,Serein amont,21,vigilance,1,[],1
+9365,Armançon amont,21,alerte,2,[],1
+9366,Châtillonnais,21,alerte,2,[],1
+9367,Arroux,21,vigilance,1,[],1
+6130,COTES-D'ARMOR,22,vigilance,1,,0
+4608,zone non couverte par l'arrêté cadre,23,alerte,2,[],1
+5674,Le Cher,23,alerte,2,[],1
+5675,La Tardes,23,alerte,2,[],1
+5676,La Sedelle,23,alerte,2,[],1
+5677,La Creuse de sa source au ruisseau du Chezalet,23,alerte,2,[],1
+5678,La Creuse du ruisseau du Chezalet à sa confluence avec la Petite Creuse,23,alerte,2,[],1
+5679,La Petite Creuse,23,alerte,2,[],1
+5680,"Le Thaurion, La Maulde et leurs affluents",23,alerte,2,[],1
+5681,La Gartempe et ses affluents,23,alerte,2,[],1
+5682,La Dordogne,23,alerte,2,[],1
+5683,L'Allier,23,alerte,2,[],1
+9587,Dropt - Bournègue,24,alerte_renforcee,3,[],1
+9588,Lizonne - Belle,24,crise,4,[],1
+9589,Dordogne aval - Lidoire,24,alerte_renforcee,3,[],1
+9596,Dordogne aval - Estrop,24,alerte_renforcee,3,[],1
+9598,Dordogne aval - Couze-Couzeau,24,alerte_renforcee,3,[],1
+9599,Dropt - Dropt amont,24,alerte_renforcee,3,[],1
+9600,Dordogne aval - Eyraud,24,alerte,2,[],1
+9601,Lizonne - Sauvanie,24,alerte,2,[],1
+9602,Isle amont - Loue,24,alerte,2,[],1
+9607,Isle aval - Vern,24,alerte_renforcee,3,[],1
+9608,Dronne - Boulou,24,alerte_renforcee,3,[],1
+9609,Dordogne aval - Seignal,24,crise,4,[],1
+9612,Vézère - Cern,24,alerte_renforcee,3,[],1
+9613,Isle aval - Crempse,24,alerte,2,[],1
+9615,Dordogne aval - Conne,24,crise,4,[],1
+9617,Isle aval - Beauronne de St-Vincent,24,alerte_renforcee,3,[],1
+9618,Charente amont - Tardoire,24,alerte,2,[],1
+9619,Dordogne aval - Caudeau,24,alerte_renforcee,3,[],1
+9621,Isle aval - Beauronne des Lèches,24,alerte_renforcee,3,[],1
+9622,Dordogne aval - Gardonnette,24,alerte_renforcee,3,[],1
+9624,Isle aval - Beauronne de Chancelade,24,alerte_renforcee,3,[],1
+9626,Charente amont - Bandiat,24,alerte,2,[],1
+9628,Dordogne amont - Céou aval,24,alerte_renforcee,3,[],1
+9629,Dordogne amont - Céou amont,24,crise,4,[],1
+9631,Dordogne amont - Germaine,24,alerte,2,[],1
+9632,Dordogne amont - Tournefeuille,24,crise,4,[],1
+9633,Dronne - Dronne amont,24,alerte,2,[],1
+9636,Dropt - Escourou,24,alerte_renforcee,3,[],1
+3650,Haute Chaine_dpt 25,25,alerte_renforcee,3,,0
+3652,bassin versant de l'Allan_dpt 25,25,alerte,2,,0
+3653,Plateaux calcaires jurassiens_dpt 25,25,alerte,2,,0
+3658,Moyennes vallées du Doubs et de l'Ognon et plaine jurassienne_dpt 25,25,alerte,2,,0
+9381,LEZ PROVENCAL - LAUZON,26,alerte_renforcee,3,[],1
+9382,AEYGUES,26,alerte,2,[],1
+9393,LEZ PROVENCAL - LAUZON,26,alerte_renforcee,3,[],1
+9394,AEYGUES,26,alerte,2,[],1
+9563,VALLOIRE,26,alerte,2,[],1
+9564,GALAURE - DROME DES COLLINES,26,alerte_renforcee,3,[],1
+9575,VALLOIRE,26,vigilance,1,[],1
+9576,GALAURE - DROME DES COLLINES,26,alerte_renforcee,3,[],1
+9577,PLAINE DE VALENCE,26,alerte_renforcee,3,[],1
+9578,ROYANS-VERCORS,26,vigilance,1,[],1
+9579,DROME,26,alerte_renforcee,3,[],1
+9580,ROUBION - JABRON,26,alerte_renforcee,3,[],1
+9585,MEOUGE,26,alerte_renforcee,3,[],1
+9586,PLAINE AVAL DU RHONE,26,vigilance,1,[],1
+9741,AIGRE,28,vigilance,1,[],1
+9742,EURE Amont,28,alerte,2,[],1
+9743,EURE Moyen haut,28,alerte_renforcee,3,[],1
+9744,EURE Moyen bas,28,alerte,2,[],1
+9745,EURE Aval,28,vigilance,1,[],1
+9746,OZANNE Amont,28,crise,4,[],1
+9747,OZANNE Aval,28,alerte_renforcee,3,[],1
+9748,YERRE Amont,28,crise,4,[],1
+9749,YERRE Aval,28,alerte_renforcee,3,[],1
+9750,BLAISE,28,alerte,2,[],1
+9751,CLOCHE,28,alerte_renforcee,3,[],1
+9754,FOUSSARDE,28,alerte,2,[],1
+9755,RHONE,28,alerte,2,[],1
+9756,THIRONNE,28,alerte,2,[],1
+9757,VACHERESSE,28,alerte_renforcee,3,[],1
+9759,VOISE,28,alerte,2,[],1
+9760,LOIR Amont,28,alerte_renforcee,3,[],1
+9761,LOIR Aval,28,alerte,2,[],1
+9762,AVRE Moyen,28,vigilance,1,[],1
+9763,AVRE Aval,28,vigilance,1,[],1
+8254,ILE-DE-BATZ,29,vigilance,1,[],1
+8255,AULNE,29,vigilance,1,[],1
+8256,ODET,29,vigilance,1,[],1
+8257,OUESSANT,29,vigilance,1,[],1
+8258,ILE-DE-SEIN,29,vigilance,1,[],1
+8259,ILE-MOLENE,29,vigilance,1,[],1
+8260,BAS LEON,29,vigilance,1,[],1
+8261,ELORN,29,vigilance,1,[],1
+8262,BAIE DE DOUARNENEZ - OUEST CORNOUAILLE,29,vigilance,1,[],1
+8263,HAUT LEON - TREGOR,29,vigilance,1,[],1
+8264,SUD CORNOUAILLE - ISOLE,29,vigilance,1,[],1
+8265,ILE-DE-BATZ,29,vigilance,1,[],1
+8266,AULNE,29,vigilance,1,[],1
+8267,ODET,29,vigilance,1,[],1
+8268,OUESSANT,29,vigilance,1,[],1
+8269,ILE-DE-SEIN,29,vigilance,1,[],1
+8270,ILE-MOLENE,29,vigilance,1,[],1
+8271,BAS LEON,29,vigilance,1,[],1
+8272,ELORN,29,vigilance,1,[],1
+8273,BAIE DE DOUARNENEZ - OUEST CORNOUAILLE,29,vigilance,1,[],1
+8274,HAUT LEON - TREGOR,29,vigilance,1,[],1
+8275,SUD CORNOUAILLE - ISOLE,29,vigilance,1,[],1
+3237,Zone sud,2A,alerte,2,[],1
+3238,Zone nord,2A,alerte,2,[],1
+4605,zone non couverte par l'arrêté cadre,2B,vigilance,1,[],1
+7189,Plaine Orientale,2B,alerte_renforcee,3,[],1
+7190,Centre Corse,2B,alerte_renforcee,3,[],1
+7191,Balagne,2B,alerte_renforcee,3,[],1
+7192,Cap - Nebbio,2B,alerte_renforcee,3,[],1
+8376,Dourbie et Trevezel,30,vigilance,1,[],1
+8377,Herault (partie dpt30),30,alerte,2,[],1
+8378,Vidourle (partie dpt30),30,alerte_renforcee,3,[],1
+8379,"Vistrenque, Costières et Vistre",30,alerte,2,[],1
+8380,Rhône et camargue gardoise,30,vigilance,1,[],1
+8381,Gardon_aval (de la prise d'eau du canal de Boucoiran jusqu'au Rhône),30,alerte_renforcee,3,[],1
+8382,Gardon_amont (de ses sources à la prise d'eau du canal de Boucoiran),30,alerte,2,[],1
+8383,Ceze_amont (de sa source à la confluence avec la Claysse incluse),30,alerte_renforcee,3,[],1
+8384,Ceze_aval (de la confluence avec la Claysse jusqu'au Rhône),30,alerte_renforcee,3,[],1
+8385,Ardeche (dpt30),30,alerte,2,[],1
+8422,Dourbie et Trevezel  ESO correspondant à ZA ESU même emprise,30,vigilance,1,[],1
+8423,Herault (partie dpt30) ESO correspondant à ZA ESU même emprise,30,alerte,2,[],1
+8424,Vidourle (partie dpt30) ESO correspondant à ZA ESU  même emprise,30,alerte_renforcee,3,[],1
+8425,"Vistrenque, Costières et Vistre  ESO correspondant à ZA ESU  même emprise",30,alerte,2,[],1
+8426,Rhône et camargue gardoise  ESO correspondant à ZA ESU  même emprise,30,vigilance,1,[],1
+8427,Gardon_aval (prise d'eau canal Boucoiran jusqu'au Rhône) ESO correspondant à ZA ESU même emprise,30,alerte_renforcee,3,[],1
+8428,Gardon_amont (des sources à la prise d'eau canal  Boucoiran) ESO correspondant à ZA ESU  même empris,30,alerte,2,[],1
+8429,Ceze_amont (de sa source à la confluence Claysse incluse) ESO correspondant à ZA ESU  même emprise,30,alerte_renforcee,3,[],1
+8430,Ceze_aval (de la confluence avec Claysse jusqu'au Rhône) ESO correspondant à ZA ESU  même emprise,30,alerte_renforcee,3,[],1
+8431,Ardeche (dpt30)  ESO correspondant à ZA ESU  même emprise,30,alerte,2,[],1
+9919,Tescou,31,alerte_renforcee,3,[],1
+9934,Système Neste,31,vigilance,1,[],1
+9937,Secteur sud du département des petits cours d'eau non réalimentés non instrumentés,31,alerte_renforcee,3,[],1
+9938,Secteur rive droite Garonne des petits cours d'eau non réalimentés non instrumentés,31,alerte_renforcee,3,[],1
+9939,Secteur rive gauche Garonne des petits cours d'eau non réalimentés non instrumentés,31,crise,4,[],1
+9327,Rivière Le Gers réalimenté,32,vigilance,1,[],1
+9329,Rivière la Baise réalimenté,32,vigilance,1,[],1
+9330,Rivière La Gimone réalimenté,32,vigilance,1,[],1
+9332,Rivière la Save - Gesse réalimenté,32,vigilance,1,[],1
+9334,Rivière L'Arrats réalimenté,32,vigilance,1,[],1
+9335,Rivière Le Bouès réalimenté,32,vigilance,1,[],1
+9339,Rivière Guiroue aval baradee réalimenté,32,vigilance,1,[],1
+9341,Rivière La Marcaoue réalimenté,32,vigilance,1,[],1
+9342,Rivière L'Aussoue réalimenté,32,vigilance,1,[],1
+9346,Rivière de l'Osse amont Lizet réalimenté,32,vigilance,1,[],1
+9348,Rivière de l'Osse aval Lizet réalimenté,32,vigilance,1,[],1
+9314,Bassin versant de l'Auroue non réalimenté,32,crise,4,,0
+9328,Rivière L'Auzoue réalimenté,32,crise,4,,0
+9344,Bassin versant de l'Adour non réalimenté,32,vigilance,1,,0
+9238,ZA Moron – Virvée,33,alerte,2,[],1
+9252,ZA Barbanne - Lavié - Palais,33,alerte_renforcee,3,[],1
+9254,ZA Gravouse – Durèze - Soulège,33,alerte_renforcee,3,[],1
+9255,ZA Laurence,33,alerte,2,[],1
+9259,ZA Lidoire,33,alerte_renforcee,3,[],1
+9264,ZA Andouille,33,alerte_renforcee,3,[],1
+8386,Vidourle (dpt 34),34,alerte_renforcee,3,[],1
+8387,Etang de l'Or,34,alerte,2,[],1
+8388,"bassin versant du Lez, de la Mosson hors axe Lez soutenu",34,alerte,2,[],1
+8389,"Axe Lez soutenu, de sa source à son embouchure",34,vigilance,1,[],1
+8390,Hérault amont confluence avec la Vis jusqu'à la confluence avec la Lergue (partie dpt34),34,alerte,2,[],1
+8391,bassin versant de la Lergue,34,alerte,2,[],1
+8392,BV Hérault aval de la confluence avec la Lergue jusqu'à l'embouchure,34,alerte,2,[],1
+8393,"BV de l'Orb de sa source jusqu'à l'amont de la confluence avec le Jaur, hors axe soutenu",34,alerte,2,[],1
+8394,Axe Orb soutenu à l'aval du barrage des Monts d'Orb,34,alerte,2,[],1
+8395,bassin versant du Jaur,34,alerte,2,[],1
+8396,bv de l'Orb à l'aval de la confluence avec le Jaur jusqu'à l'embouchure hors axe soutenu,34,alerte,2,[],1
+8397,bv de l'Agout (partie dpt 34),34,vigilance,1,[],1
+8398,bv de l'Aude aval - Berre et Rieu (partie dpt 34),34,alerte,2,[],1
+8399,bv Argent Double et Ognon (partie dpt 34),34,alerte,2,[],1
+8400,bv Cesse (partie dpt 34),34,alerte,2,[],1
+8401,canal du Midi (partie dpt34),34,alerte,2,[],1
+8432,Nappe astienne (partie dpt34),34,vigilance,1,[],1
+8433,Molasses de Castries Sommières / secteur de Castries (partie dpt34),34,vigilance,1,[],1
+8491,Secteur milieux aquatiques 1 - Bassin Côtier,35,alerte,2,[],1
+8492,Secteur milieux aquatiques 2 - Bassin du Couesnon,35,alerte,2,[],1
+8493,Secteur milieux aquatiques 3 - Bassin de la Vilaine Nord-Meu,35,alerte,2,[],1
+8494,Secteur milieux aquatiques 4 - Bassin de la Vilaine en amont de Rennes,35,alerte,2,[],1
+8495,Secteur milieux aquatiques 5 - Bassin de la rive gauche de la Vilaine,35,alerte,2,[],1
+8496,Secteur milieux aquatiques 6 - Bassin de l'Aff,35,alerte,2,[],1
+8497,Secteur milieux aquatiques 7 - Bassin de la Chère,35,alerte,2,[],1
+7464,bassin de l'Anglin amont confuence allemette,36,alerte_renforcee,3,[],1
+7465,bassin de l'Anglin aval confluence allemette,36,alerte_renforcee,3,[],1
+7466,bassin de la Bouzanne,36,alerte_renforcee,3,[],1
+7467,bassin de la Claise,36,alerte_renforcee,3,[],1
+7468,bassin de La Creuse,36,alerte,2,[],1
+7469,bassin de la Gartempe,36,alerte,2,[],1
+7470,bassin de l'Indre amont à châteauroux,36,alerte_renforcee,3,[],1
+7471,bassin de l'Indre aval à châteauroux,36,alerte,2,[],1
+7472,bassin de l'Indrois,36,alerte_renforcee,3,[],1
+7473,bassin de la Tourmente,36,alerte_renforcee,3,[],1
+7474,bassin de la Trégonce,36,crise,4,[],1
+7475,bassin de la Ringoire,36,crise,4,[],1
+7476,bassin de l'Arnon,36,alerte,2,[],1
+7477,bassin de la Théols,36,alerte,2,[],1
+7478,bassin de le Fouzon,36,alerte,2,[],1
+7479,bassin de le Modon,36,alerte,2,[],1
+7480,bassin de Cher (36),36,vigilance,1,[],1
+8819,Bassin de la Loire (Lre1),37,vigilance,1,[],1
+8820,Bassin de la Loire (Lre2),37,vigilance,1,[],1
+8821,Bassin du Loir (Lr1),37,vigilance,1,[],1
+8822,Bassin du Cher (Ch1),37,vigilance,1,[],1
+8823,Bassin de l'Indre (In1),37,vigilance,1,[],1
+8824,Bassin de l'Indre (In2),37,vigilance,1,[],1
+8825,Bassin de la Creuse (Cr),37,vigilance,1,[],1
+8826,Bassin de la Vienne (Vn1),37,vigilance,1,[],1
+8827,Bassin de la Gartempe,37,vigilance,1,[],1
+8828,Bassin de l'Aigronne,37,alerte_renforcee,3,[],1
+8829,Bassin de l'Ardillere,37,vigilance,1,[],1
+8830,Bassin de l'Echandon,37,alerte_renforcee,3,[],1
+8831,Bassin de l'Escotais,37,alerte_renforcee,3,[],1
+8832,Bassin de l'Esves,37,vigilance,1,[],1
+8833,Bassin de l'Indrois,37,alerte_renforcee,3,[],1
+8834,Bassin de la Bourouse,37,crise,4,[],1
+8835,Bassin de la Brenne,37,alerte_renforcee,3,[],1
+8836,Bassin de la Bresme,37,vigilance,1,[],1
+8837,Bassin de la Choisille,37,alerte_renforcee,3,[],1
+8838,Bassin de la Cisse,37,vigilance,1,[],1
+8839,Bassin de la Claise,37,alerte_renforcee,3,[],1
+8840,Bassin de la Deme,37,alerte_renforcee,3,[],1
+8841,Bassin de la Fare,37,alerte_renforcee,3,[],1
+8842,Bassin de la Fontaine Menard,37,crise,4,[],1
+8843,Bassin de la Manse,37,alerte_renforcee,3,[],1
+8844,Bassin de la Masse,37,vigilance,1,[],1
+8845,Bassin de la Maulne,37,alerte_renforcee,3,[],1
+8846,Bassin de la Muanne,37,vigilance,1,[],1
+8847,Bassin de la Roumer,37,crise,4,[],1
+8848,Bassin de la Tourmente,37,alerte_renforcee,3,[],1
+8849,Bassin de la Veude,37,crise,4,[],1
+8850,Bassin de la Veude De Poncay,37,crise,4,[],1
+8851,Bassin du Brignon,37,alerte_renforcee,3,[],1
+8852,Bassin du Changeon,37,alerte_renforcee,3,[],1
+8853,Bassin du Douai ou de la Riasse,37,vigilance,1,[],1
+8854,Bassin du Lane,37,vigilance,1,[],1
+8855,Bassin du Lathan,37,vigilance,1,[],1
+8856,Bassin du Long,37,alerte_renforcee,3,[],1
+8857,Bassin du Negron,37,crise,4,[],1
+8858,Bassin du ruisseau d'Aubigny,37,crise,4,[],1
+8859,Bassin du ruisseau d'Azay,37,vigilance,1,[],1
+8860,Bassin du ruisseau d'Olivet,37,alerte_renforcee,3,[],1
+8861,Bassin du ruisseau de Boutineau,37,vigilance,1,[],1
+8862,Bassin du ruisseau de Chantereine,37,alerte_renforcee,3,[],1
+8863,Bassin du ruisseau de Chezelles,37,vigilance,1,[],1
+8864,Bassin du ruisseau de Cleret,37,crise,4,[],1
+8865,Bassin du ruisseau de Gaudeberts,37,crise,4,[],1
+8866,Bassin du ruisseau de la Coulee,37,crise,4,[],1
+8867,Bassin du ruisseau de Montison,37,vigilance,1,[],1
+8868,Bassin du ruisseau de Panzoult,37,vigilance,1,[],1
+8869,Bassin du ruisseau de Parcay,37,crise,4,[],1
+8870,Bassin du ruisseau de Rigny,37,crise,4,[],1
+8871,Bassin du ruisseau de Roche,37,crise,4,[],1
+8872,Bassin du ruisseau de Rochette,37,vigilance,1,[],1
+8873,Bassin du ruisseau de Verneuil,37,crise,4,[],1
+8874,Bassin du ruisseau de Vitray,37,vigilance,1,[],1
+8875,Bassin du ruisseau des Vallees,37,crise,4,[],1
+8876,Bassin du ruisseau du Doigt,37,crise,4,[],1
+8877,Bassin du ruisseau Sennevieres,37,crise,4,[],1
+8878,Bassin du Vieux Cher,37,vigilance,1,[],1
+11652,Bassin de la Loire (Lre2),37,vigilance,1,[],1
+11653,Bassin de la Loire (Lre1),37,vigilance,1,[],1
+11654,Bassin du Loir (Lr1),37,vigilance,1,[],1
+11655,Bassin du Cher (Ch1),37,vigilance,1,[],1
+11656,Bassin de l'Indre (In1),37,vigilance,1,[],1
+11657,Bassin de l'Indre (In2),37,vigilance,1,[],1
+11658,Bassin de la Creuse (Cr),37,vigilance,1,[],1
+11659,Bassin de la Vienne (Vn1),37,vigilance,1,[],1
+11660,Bassin de la Gartempe,37,vigilance,1,[],1
+11661,Bassin de l'Aigronne,37,alerte_renforcee,3,[],1
+11662,Bassin de l'Ardillere,37,vigilance,1,[],1
+11663,Bassin de l'Echandon,37,alerte_renforcee,3,[],1
+11664,Bassin de l'Escotais,37,alerte_renforcee,3,[],1
+11665,Bassin de l'Esves,37,vigilance,1,[],1
+11666,Bassin de l'Indrois,37,alerte_renforcee,3,[],1
+11667,Bassin de la Bourouse,37,crise,4,[],1
+11668,Bassin de la Brenne,37,vigilance,1,[],1
+11669,Bassin de la Bresme,37,crise,4,[],1
+11670,Bassin de la Choisille,37,alerte_renforcee,3,[],1
+11671,Bassin de la Cisse,37,alerte_renforcee,3,[],1
+11672,Bassin de la Claise,37,vigilance,1,[],1
+11673,Bassin de la Deme,37,alerte_renforcee,3,[],1
+11674,Bassin de la Fare,37,alerte_renforcee,3,[],1
+11675,Bassin de la Fontaine Menard,37,crise,4,[],1
+11676,Bassin de la Manse,37,alerte_renforcee,3,[],1
+11677,Bassin de la Masse,37,vigilance,1,[],1
+11678,Bassin de la Maulne,37,vigilance,1,[],1
+11679,Bassin de la Muanne,37,vigilance,1,[],1
+11680,Bassin de la Roumer,37,vigilance,1,[],1
+11681,Bassin de l'Indrois Amont,37,alerte_renforcee,3,[],1
+11682,Bassin de la Veude,37,alerte_renforcee,3,[],1
+11683,Bassin de la Veude De Poncay,37,alerte_renforcee,3,[],1
+11684,Bassin du Brignon,37,alerte_renforcee,3,[],1
+11685,Bassin du Changeon,37,alerte_renforcee,3,[],1
+11686,Bassin du Douai ou de la Riasse,37,vigilance,1,[],1
+11687,Bassin du Lathan,37,vigilance,1,[],1
+11688,Bassin du Long,37,alerte_renforcee,3,[],1
+11689,Bassin du Negron,37,alerte_renforcee,3,[],1
+11690,Bassin du ruisseau d'Aubigny,37,crise,4,[],1
+11691,Bassin du ruisseau d'Azay,37,crise,4,[],1
+11692,Bassin du ruisseau d'Olivet,37,alerte_renforcee,3,[],1
+11693,Bassin du ruisseau de Boutineau,37,vigilance,1,[],1
+11694,Bassin du ruisseau de Chantereine,37,alerte_renforcee,3,[],1
+11695,Bassin du ruisseau de Chezelles,37,vigilance,1,[],1
+11696,Bassin du ruisseau de Cleret,37,crise,4,[],1
+11697,Bassin du ruisseau de Gaudeberts,37,vigilance,1,[],1
+11698,Bassin du ruisseau de la Coulee,37,crise,4,[],1
+11699,Bassin du ruisseau de Montison,37,vigilance,1,[],1
+11700,Bassin du ruisseau de Panzoult,37,crise,4,[],1
+11701,Bassin du ruisseau de Parcay,37,crise,4,[],1
+11702,Bassin du ruisseau de Rigny,37,crise,4,[],1
+11703,Bassin du ruisseau de Roche,37,crise,4,[],1
+11704,Bassin du ruisseau de Rochette,37,vigilance,1,[],1
+11705,Bassin du ruisseau de Verneuil,37,vigilance,1,[],1
+11706,Bassin du ruisseau de Vitray,37,vigilance,1,[],1
+11707,Bassin du ruisseau des Vallees,37,vigilance,1,[],1
+11708,Bassin du ruisseau du Doigt,37,vigilance,1,[],1
+11709,Bassin du ruisseau Sennevieres,37,vigilance,1,[],1
+11710,Bassin du Vieux Cher,37,vigilance,1,[],1
+9486,Est Lyonnais,38,alerte,2,[],1
+9487,Galaure et Drôme des Collines,38,alerte_renforcee,3,[],1
+9488,Bièvre-Liers-Valloire,38,alerte,2,[],1
+9489,"Sanne, Varèze et 4 Vallées",38,alerte,2,[],1
+9490,Chambaran,38,alerte_renforcee,3,[],1
+9491,Vercors,38,alerte_renforcee,3,[],1
+9492,Trièves et Matheysine,38,alerte_renforcee,3,[],1
+9493,Oisans et Bonne,38,alerte_renforcee,3,[],1
+9494,Belledonne,38,alerte_renforcee,3,[],1
+9495,Chartreuse et Guiers,38,alerte_renforcee,3,[],1
+9496,Paladru et Fure,38,alerte,2,[],1
+9497,Bourbre,38,alerte,2,[],1
+9498,Isle Crémieu,38,alerte,2,[],1
+9499,Nappes de l'Est Lyonnais,38,vigilance,1,[],1
+9500,Nappes de Galaure et Drôme des Collines,38,alerte_renforcee,3,[],1
+9501,Nappes de Bièvre-Liers-Valloire,38,vigilance,1,[],1
+9502,"Nappes des 4Vallées, de la Sanneet de la Varèze",38,alerte,2,[],1
+9503,Nappes du Bas Dauphiné Chambaran et des terrasses de l'Isère,38,alerte_renforcee,3,[],1
+8968,Seille et affluents de la Loue,39,alerte_renforcee,3,[],1
+8969,Plateau calcaire,39,alerte_renforcee,3,[],1
+8970,Nord Jura,39,alerte_renforcee,3,[],1
+8971,Haute chaîne,39,alerte_renforcee,3,[],1
+8972,Forêt de chaux et alluvions Doubs Loue,39,vigilance,1,[],1
+8973,Formations bressannes,39,vigilance,1,[],1
+5367,bassin de la Midouze et du louts zone 3 D Midouze,40,vigilance,1,[],1
+5368,bassin du Midou et de la Douze zone 4D Douze,40,vigilance,1,[],1
+5369,bassin de l'Adour zone 2A,40,vigilance,1,[],1
+5370,bassin de l'Adour zone 2B,40,vigilance,1,[],1
+5372,bassin du Midou et de la Douze zone 4C,40,vigilance,1,[],1
+5373,bassin du Midou et de la Douze zone 4B Douze,40,vigilance,1,[],1
+5374,bassin du Midou et de la Douze zone 4A,40,vigilance,1,[],1
+5375,bassin de l'Adour zone 2C,40,vigilance,1,[],1
+5376,bassin de l'Adour zone 2D,40,vigilance,1,[],1
+5380,bassin de la Midouze et du louts zone 3B,40,vigilance,1,[],1
+5381,bassin du Midou et de la Douze zone 4B Midou,40,alerte_renforcee,3,[],1
+5383,bassin de la Midouze et du louts zone 3A,40,vigilance,1,[],1
+5384,bassin du Midou et de la Douze zone 4D Midou,40,alerte_renforcee,3,[],1
+5386,bassin de la Midouze et du louts zone 3C,40,vigilance,1,[],1
+5388,bassin de la Midouze et du louts zone 3D Louts,40,vigilance,1,[],1
+10323,Bassin du Midou et de la Douze (zone 4B Midou),40,alerte_renforcee,3,[],1
+10324,Bassin du Midou et de la Douze (zone 4D Midou),40,alerte_renforcee,3,[],1
+10216,Barade de Ligautenx (Moulin de l'Esleys),40,crise,4,,0
+10254,Ruisseau de Bassecq,40,crise,4,,0
+5385,bassin du Ludon,40,alerte,2,,0
+8974,Affluents Loire amont,41,alerte_renforcee,3,[],1
+8975,Aflluents Loire aval,41,alerte_renforcee,3,[],1
+8977,Bassin du Beuvron,41,vigilance,1,[],1
+8978,Bassin de la Brenne,41,alerte_renforcee,3,[],1
+8979,Bassin du Cher,41,vigilance,1,[],1
+8980,Bassin de la Cisse,41,alerte,2,[],1
+8981,Bassin du Cosson,41,vigilance,1,[],1
+8982,Bassin du Fouzon,41,vigilance,1,[],1
+8983,Bassin de La Braye,41,alerte_renforcee,3,[],1
+8984,Bassin du Loir amont,41,vigilance,1,[],1
+8985,Bassin du Loir aval,41,vigilance,1,[],1
+8986,Bassin de la Masse,41,alerte_renforcee,3,[],1
+8987,Bassin des Mauves,41,alerte,2,[],1
+8989,Affluents Loire amont,41,alerte_renforcee,3,[],1
+8990,Aflluents Loire aval,41,alerte_renforcee,3,[],1
+8991,Bassin  de l'Aigre,41,vigilance,1,[],1
+8992,Bassin du Beuvron,41,vigilance,1,[],1
+8993,Bassin de la Brenne,41,alerte,2,[],1
+8994,Bassin du Cher,41,vigilance,1,[],1
+8995,Bassin de la Cisse,41,alerte,2,[],1
+8996,Bassin du Cosson,41,vigilance,1,[],1
+8997,Bassin du Fouzon,41,vigilance,1,[],1
+8999,Bassin du Loir amont,41,vigilance,1,[],1
+9000,Bassin du Loir aval,41,vigilance,1,[],1
+9001,Bassin de la Masse,41,alerte_renforcee,3,[],1
+9002,Bassin des Mauves,41,alerte,2,[],1
+9003,Bassin de la Sauldre,41,vigilance,1,[],1
+7705,Fleuve Loire et sa nappe d'accompagnement à l'amont de la queue de retenue de Villerest,42,alerte_renforcee,3,[],1
+7706,"Affluents de la Loire à l'amont de la confluence Furan : Dunière, l'Andrable, Semène, Ondaine, Furan",42,alerte,2,[],1
+7707,Fleuve Loire et sa nappe d'accompagnement à l'aval de la queue de retenue de Villerest,42,vigilance,1,[],1
+7708,Affluents rive gauche de la Loire jusqu'au barrage de Villerest,42,alerte,2,[],1
+7709,Affluents rive droite de la Loire de la confluence avec le Furan jusqu'au barrage de Villerest,42,alerte_renforcee,3,[],1
+7710,"Affluents rive gauche de la Loire à l'aval du barrage de Villerest; Besbre, Malgoutte, Arcon, Urbise",42,alerte,2,[],1
+7711,Affluents rive droite de la Loire à l'aval du barrage de Villerest,42,alerte,2,[],1
+7712,"Affluents du Rhône hors Gier, bassins versants Limony Cance hors Rhône et sa nappe d'accompagnement",42,alerte,2,[],1
+7713,Bassin versant du Gier dans le département,42,alerte,2,[],1
+7714,"Affluents de la Loire à l'amont de la confluence Furan : Dunière, l'Andrable, Semène, Ondaine, Furan",42,alerte,2,[],1
+5117,ALLIER (lit mineur + 100m),43,alerte,2,[],1
+5118,ALLIER AVAL,43,alerte,2,[],1
+5119,ALLIER MOYEN,43,alerte,2,[],1
+5120,ALLIER AMONT,43,alerte,2,[],1
+5121,ALAGNON,43,alerte,2,[],1
+5122,LOIRE (lit mineur + 100m),43,alerte,2,[],1
+5123,LOIRE AVAL,43,alerte,2,[],1
+5124,LOIRE MOYENNE RIVE GAUCHE,43,alerte,2,[],1
+5125,LOIRE MOYENNE RIVE DROITE,43,alerte,2,[],1
+5126,HAUT-LIGNON,43,alerte,2,[],1
+5127,BORNE,43,alerte,2,[],1
+5128,LOIRE AMONT,43,alerte,2,[],1
+5129,DORETTE,43,alerte,2,[],1
+5623,bassin d'alimentation des captages de Machecoul,44,vigilance,1,[],1
+5624,bassin d'alimentation des captages de Nort-sur-Erdre,44,vigilance,1,[],1
+5625,nappe en relation avec le lac de Grand-Lieu (St Philbert et Chevrolière),44,vigilance,1,[],1
+8475,Bassin de la Vilaine,44,crise,4,[],1
+8476,Bassin de l'Oudon,44,alerte_renforcee,3,[],1
+8477,Bassin côtiers bretons,44,crise,4,[],1
+8478,Bassin de l'Erdre Amont,44,crise,4,[],1
+8479,Bassin de l'Erdre Aval,44,vigilance,1,[],1
+8480,Bassin Affluents Nord Loire,44,crise,4,[],1
+8481,Bassin Affluents Sud Loire,44,crise,4,[],1
+8482,Bassin de la Loire,44,vigilance,1,[],1
+8483,Bassin de la Brière,44,crise,4,[],1
+8484,Bassin de la Sèvre Nantaise,44,alerte_renforcee,3,[],1
+8485,Bassin de la Moine,44,alerte_renforcee,3,[],1
+8486,Bassin de la Sanguèze,44,crise,4,[],1
+8487,Bassin de la Maine,44,crise,4,[],1
+8488,Bassin côtiers bretons réalimenté par la Loire,44,alerte,2,[],1
+8489,"Bassin de la Logne, Boulogne, Ognon, Grand-lieu",44,crise,4,[],1
+8490,Bassin du Lac de Grand-Lieu,44,vigilance,1,[],1
+7740,Calcaires de Beauce (Fusin 45),45,alerte,2,[],1
+7741,Calcaires de Beauce (Montargois),45,alerte,2,[],1
+8595,Bassin de l'Aquiaulne (45),45,alerte,2,[],1
+8596,Bassin de l'Ardoux (45),45,alerte_renforcee,3,[],1
+8597,Bassins Avenelle-Ethelin (45),45,crise,4,[],1
+8598,Bassin de l'Aveyron (45),45,alerte,2,[],1
+8600,Bassin du Bec d'Able,45,alerte_renforcee,3,[],1
+8601,Bassin du Betz (45),45,crise,4,[],1
+8603,Bassin de la Clery (45),45,alerte,2,[],1
+8604,Bassin du Cosson (45),45,crise,4,[],1
+8605,Fusin (45),45,alerte,2,[],1
+8606,Bassin du Loing amont (45),45,alerte_renforcee,3,[],1
+8607,Bassin du Loing aval (45),45,vigilance,1,[],1
+8608,Loire a Gien (45),45,vigilance,1,[],1
+8609,Loire a Onzain (45),45,vigilance,1,[],1
+8610,Bassins Loiret-Dhuy,45,crise,4,[],1
+8611,Bassin du Milleron (45),45,crise,4,[],1
+8614,Bassin du ru de Pont Chevron,45,alerte_renforcee,3,[],1
+8616,Bassin_de la_Bezonde,45,crise,4,[],1
+8617,Bassins Trezee-Ousson (45),45,crise,4,[],1
+8618,Bassin_de_la_Bonnee,45,crise,4,[],1
+8619,Bassin_du_Puiseaux,45,alerte_renforcee,3,[],1
+8620,Bassin_du_Solin,45,crise,4,[],1
+8621,Bassin_du_Vernisson,45,crise,4,[],1
+8134,Cère,46,vigilance,1,[],1
+8136,Mamoul,46,alerte,2,[],1
+8137,Sourdoire,46,vigilance,1,[],1
+8138,Grande Barguelonne,46,alerte,2,[],1
+8139,Vert Amont,46,alerte,2,[],1
+8140,Lendou,46,alerte,2,[],1
+8141,Petite Barguelonne,46,alerte_renforcee,3,[],1
+8142,Ourajoux,46,crise,4,[],1
+8143,Céou,46,crise,4,[],1
+8144,Bléou,46,crise,4,[],1
+8145,Drauzou,46,alerte,2,[],1
+8146,Bervezou,46,alerte,2,[],1
+8147,Veyre,46,alerte,2,[],1
+8149,Tolerme,46,vigilance,1,[],1
+8150,Melve - Marcillande - Relinquière,46,alerte,2,[],1
+8151,Tournefeuille,46,crise,4,[],1
+8152,Lemboulas,46,crise,4,[],1
+8153,Lupte,46,crise,4,[],1
+8154,Aynac,46,alerte,2,[],1
+8155,Ouysse,46,alerte,2,[],1
+8156,La Sagne,46,vigilance,1,[],1
+8157,Alzou,46,alerte,2,[],1
+8159,Vers - Rauze,46,vigilance,1,[],1
+8160,Lère,46,alerte,2,[],1
+8161,Séoune,46,crise,4,[],1
+8162,Thèze,46,vigilance,1,[],1
+8164,Guirande,46,alerte,2,[],1
+8165,Affluents du Lot,46,alerte,2,[],1
+8168,Saint Perdoux,46,alerte,2,[],1
+7776,Unité Dordogne,47,crise,4,[],1
+7778,La Masse d'Agen réalimentée,47,vigilance,1,[],1
+7779,La Séoune réalimentée,47,vigilance,1,[],1
+7780,Le Gers réalimenté,47,vigilance,1,[],1
+7781,L'Osse réalimenté,47,vigilance,1,[],1
+7783,La Baïse réalimentée,47,vigilance,1,[],1
+7790,Garonne en amont de la confluence avec Le Lot,47,vigilance,1,[],1
+7791,Garonne en aval de la confluence avec Le Lot,47,vigilance,1,[],1
+7792,Unité Dropt,47,alerte_renforcee,3,[],1
+7793,Unité Masse de Prayssas,47,crise,4,[],1
+7796,Unité Boudouyssou Tancanne,47,crise,4,[],1
+7798,La Lède réalimentée,47,vigilance,1,[],1
+7801,Unité Auroue,47,crise,4,[],1
+7802,Unité Tolzac,47,alerte,2,[],1
+7804,Unité Baïse,47,alerte_renforcee,3,[],1
+7805,Unité Thèze,47,vigilance,1,[],1
+7806,Unité Gupie,47,alerte_renforcee,3,[],1
+7807,Unité Lède,47,alerte_renforcee,3,[],1
+7809,Unité Masse d'Agen,47,alerte_renforcee,3,[],1
+7810,Unité Auvignon,47,alerte_renforcee,3,[],1
+7812,Unité Séoune,47,alerte_renforcee,3,[],1
+7813,Unité Garonne aval,47,alerte_renforcee,3,[],1
+7814,Unité Lot,47,alerte_renforcee,3,[],1
+7816,Unité Garonne amont,47,alerte_renforcee,3,[],1
+7817,Unité Avance,47,alerte,2,[],1
+7824,Le Roubillou réalimenté,47,vigilance,1,[],1
+8402,Allier,48,alerte,2,[],1
+8403,Chassezac  (y compris amont bv Luech),48,alerte,2,[],1
+8404,Colagne,48,alerte,2,[],1
+8405,Gardons cévenols (partie dpt48),48,alerte,2,[],1
+8406,Truyère,48,alerte,2,[],1
+8407,Lot,48,alerte,2,[],1
+8408,Bramont,48,alerte,2,[],1
+8409,Tarn,48,alerte,2,[],1
+8410,Tarnon,48,vigilance,1,[],1
+8411,Axe Colagne réalimenté,48,alerte_renforcee,3,[],1
+9679,OUDON,49,alerte_renforcee,3,[],1
+9681,LAYON,49,alerte_renforcee,3,[],1
+9682,HYROME,49,alerte_renforcee,3,[],1
+9683,AUBANCE,49,alerte_renforcee,3,[],1
+9687,EVRE,49,alerte_renforcee,3,[],1
+9688,THAU,49,crise,4,[],1
+9689,DIVATTE,49,crise,4,[],1
+9690,MAYENNE,49,alerte,2,[],1
+9691,LOIRE,49,vigilance,1,[],1
+9692,ROMME,49,alerte_renforcee,3,[],1
+9693,ERDRE,49,crise,4,[],1
+9694,BRIONNEAU,49,alerte,2,[],1
+9695,SARTHE,49,vigilance,1,[],1
+9696,LOIR,49,vigilance,1,[],1
+9697,AUTHION,49,vigilance,1,[],1
+9698,COUASNON,49,crise,4,[],1
+9699,LATHAN,49,vigilance,1,[],1
+9704,Alluvions de la Loire-Thau,49,vigilance,1,[],1
+9706,Romme Brionneau,49,alerte,2,[],1
+9707,Erdre,49,alerte,2,[],1
+9712,Loir-Sarthe aval,49,alerte_renforcee,3,[],1
+9713,Authion alluvions,49,vigilance,1,[],1
+9716,Sud-Loire,49,alerte,2,[],1
+9717,Layon,49,alerte_renforcee,3,[],1
+9829,NORD COTENTIN,50,vigilance,1,[],1
+9830,DOUVE - TAUTE - COTIERS NORD-EST,50,vigilance,1,[],1
+9831,VIRE,50,alerte,2,[],1
+9832,SIENNE - SOULLES,50,vigilance,1,[],1
+9833,SEE - COTIERS GRANVILLAIS,50,vigilance,1,[],1
+9834,SELUNE,50,vigilance,1,[],1
+9511,Blaise_zone_2,51,alerte,2,[],1
+9512,Blaise_zone_4,51,alerte,2,[],1
+9522,Craie de Champagne Nord,51,alerte,2,[],1
+9719,bassin Mayenne médiane et aval,53,alerte,2,[],1
+9720,bassin Oudon,53,alerte_renforcee,3,[],1
+9721,bassin Mayenne amont est,53,alerte,2,[],1
+9722,bassin Mayenne amont ouest,53,vigilance,1,[],1
+9723,bassin Sarthe amont,53,vigilance,1,[],1
+9724,bassin Sarthe aval,53,alerte,2,[],1
+9725,bassin Mayenne médiane et aval,53,alerte,2,[],1
+9726,bassin Oudon,53,alerte_renforcee,3,[],1
+9727,bassin Mayenne amont est,53,alerte,2,[],1
+9728,bassin Mayenne amont ouest,53,vigilance,1,[],1
+9729,bassin Sarthe amont,53,vigilance,1,[],1
+9730,bassin Sarthe aval,53,alerte,2,[],1
+7317,Moselle amont et Meurthe partie du département 54,54,alerte,2,,0
+7318,Meuse aval et Chiers partie du département 54,54,vigilance,1,,0
+7319,"Moselle aval, Orne, Nied et Seille partie du département 54",54,alerte,2,,0
+7320,Meuse amont et médiane partie du département 55,55,vigilance,1,[],1
+7321,Bassin Saulx-Ornain partie du département 55,55,vigilance,1,[],1
+7322,Bassin de l'Aisne partie du département 55,55,vigilance,1,[],1
+7323,"Moselle aval, Orne, Nied et Seille partie du département 55",55,alerte,2,[],1
+7324,Meuse aval et Chiers partie du département 55,55,vigilance,1,[],1
+9279,Oust Amont,56,vigilance,1,[],1
+9280,Evel,56,vigilance,1,[],1
+9281,Oust,56,vigilance,1,[],1
+9282,Scorff,56,vigilance,1,[],1
+9283,Yvel et Ninian,56,vigilance,1,[],1
+9284,Blavet,56,vigilance,1,[],1
+9285,Elle,56,vigilance,1,[],1
+9286,Aff,56,vigilance,1,[],1
+9287,Houat,56,vigilance,1,[],1
+9288,Hoedic,56,vigilance,1,[],1
+9289,Belle_ile,56,vigilance,1,[],1
+9290,Groix,56,crise,4,[],1
+9291,Vilaine aval,56,vigilance,1,[],1
+9292,Littoral,56,vigilance,1,[],1
+9293,Oust Amont,56,vigilance,1,[],1
+9294,Evel,56,vigilance,1,[],1
+9295,Oust,56,vigilance,1,[],1
+9296,Scorff,56,vigilance,1,[],1
+9297,Yvel et Ninian,56,vigilance,1,[],1
+9298,Blavet,56,vigilance,1,[],1
+9299,Elle,56,vigilance,1,[],1
+9300,Aff,56,vigilance,1,[],1
+9301,Houat,56,vigilance,1,[],1
+9302,Hoedic,56,vigilance,1,[],1
+9303,Belle_ile,56,vigilance,1,[],1
+9304,Groix,56,crise,4,[],1
+9305,Vilaine aval,56,vigilance,1,[],1
+9306,Littoral,56,vigilance,1,[],1
+7325,Moselle amont et Meurthe partie du département 57,57,alerte,2,[],1
+7326,"Moselle aval, Orne, Nied et Seille partie du département 57",57,alerte,2,[],1
+7327,"Lauter, Sauer, Moder et Zorn partie du département 57",57,vigilance,1,[],1
+7328,Sarre partie du département 57,57,vigilance,1,[],1
+6075,bassin de la  LOIRE aval,58,vigilance,1,[],1
+6081,bassin de l'ALLIER,58,vigilance,1,[],1
+6082,bassin de la LOIRE amont,58,vigilance,1,[],1
+6083,bassin de l'ACOLIN_COLATRE,58,alerte,2,[],1
+3623,"Delta de l'Aa et Audomarois, partie Nord",59,vigilance,1,[],1
+3624,"Lys, partie Nord",59,vigilance,1,[],1
+3625,"Marque-Deûle, partie Nord",59,vigilance,1,[],1
+3626,Sambre,59,alerte,2,[],1
+3627,"Scarpe amont-Sensée-Escaut, partie Nord",59,vigilance,1,[],1
+3628,Scarpe aval,59,alerte,2,[],1
+3629,Yser,59,alerte_renforcee,3,[],1
+9847,HUISNE,61,vigilance,1,[],1
+9848,ITON,61,vigilance,1,[],1
+9849,MAYENNE AMONT,61,vigilance,1,[],1
+9850,ORNE AMONT,61,vigilance,1,[],1
+9851,ORNE MOYENNE,61,vigilance,1,[],1
+9853,SARTHE,61,vigilance,1,[],1
+9854,TOUQUES,61,vigilance,1,[],1
+9855,AVRE,61,vigilance,1,[],1
+3630,"Delta de l'Aa et Audomarois, partie Pas de Calais",62,alerte,2,[],1
+3631,"Lys, partie Pas de Calais",62,vigilance,1,[],1
+3632,"Marque-Deûle, partie Pas de Calais",62,vigilance,1,[],1
+3635,Boulonnais,62,alerte,2,[],1
+9731,Bassin du Saleys de sa source à Salies,64,crise,4,,0
+9732,Bassin du Saleys de Salies à la confluence avec l'Adour,64,crise,4,,0
+9733,"Bassin de l'Ousse des Bois et de son affluent, l'Oussère",64,crise,4,,0
+9734,Bassin du Lausset,64,crise,4,,0
+9735,Bassin de la Bayse et son affluent la Baysere,64,alerte_renforcee,3,,0
+9736,Bassin de la Joyeuse,64,crise,4,,0
+9737,Bassin de la Bidouze de sa source au Moulin de Came,64,vigilance,1,,0
+9738,Bassin de la Bidouze du Moulin de Came à la confluence avec l'Adour,64,vigilance,1,,0
+9739,"Bassin de l'Ousse et ses affluents, l'Arriou Merdé et l'Oussère",64,crise,4,,0
+9740,Bassin du Saison,64,vigilance,1,,0
+3931,BV de l'Echez,65,crise,4,,0
+4002,BV du système alimenté par le canal de la Neste,65,vigilance,1,,0
+8412,Agly Amont,66,vigilance,1,[],1
+8413,Agly Aval,66,vigilance,1,[],1
+8414,Aude Amont,66,vigilance,1,[],1
+8415,Têt Amont Vinça,66,vigilance,1,[],1
+8416,Têt Aval,66,vigilance,1,[],1
+8417,Tech amont,66,alerte,2,[],1
+8418,Tech aval,66,alerte,2,[],1
+8419,Segre Carol,66,vigilance,1,[],1
+8434,secteur Salanque (nappes Roussillon),66,vigilance,1,[],1
+8435,secteur Cote nord (nappes Roussillon),66,alerte,2,[],1
+8436,secteur Têt (nappes Roussillon),66,vigilance,1,[],1
+8437,secteur Aspres (nappes Roussillon),66,alerte,2,[],1
+8438,secteur Cote sud (nappes Roussillon),66,vigilance,1,[],1
+8439,secteur Tech (nappes Roussillon),66,alerte_renforcee,3,[],1
+7329,Ill aval partie du département 67,67,vigilance,1,[],1
+7330,"Bruche, Ehn, Andlau, Giessen et Liepvrette partie du département 67",67,vigilance,1,[],1
+7331,Sarre partie du département 67,67,vigilance,1,[],1
+7332,"Lauter, Sauer, Moder et Zorn partie du département 67",67,vigilance,1,[],1
+7333,Ill amont,68,alerte,2,,0
+7334,Ill aval partie du département 68,68,vigilance,1,,0
+7335,"Doller amont, Fecht, Weiss et Lauch",68,alerte,2,,0
+7336,Doller aval,68,vigilance,1,,0
+7337,Thur,68,alerte,2,,0
+7338,"Bruche, Ehn, Andlau, Giessen et Liepvrette partie du département 68",68,alerte_renforcee,3,,0
+9898,ZONE 1,69,alerte_renforcee,3,[],1
+9899,ZONE 2 - axe Saône,69,vigilance,1,[],1
+9900,ZONE 3,69,alerte_renforcee,3,[],1
+9901,ZONE 4,69,alerte_renforcee,3,[],1
+9902,ZONE 5,69,alerte_renforcee,3,[],1
+9903,ZONE 6,69,alerte,2,[],1
+9904,ZONE 7,69,alerte,2,[],1
+9905,ZONE 8,69,alerte,2,[],1
+9906,ZONE 8,69,alerte,2,[],1
+9907,ZONE 9,69,alerte,2,[],1
+9908,ZONE 2 - axe Saône,69,vigilance,1,[],1
+9909,ZONE 5,69,vigilance,1,[],1
+9910,ZONE 7,69,vigilance,1,[],1
+9911,ZONE 8,69,vigilance,1,[],1
+9912,ZONE 8,69,vigilance,1,[],1
+9913,ZONE 9,69,vigilance,1,[],1
+3655,Vosges et depression vosgienne,70,alerte_renforcee,3,[],1
+3657,Moyennes vallées du Doubs et de l'Ognon et plaine jurassienne_ dpt 70,70,alerte_renforcee,3,[],1
+3659,Plateaux calcaires de la Haute Saône,70,alerte_renforcee,3,[],1
+3660,Saone amont,70,alerte_renforcee,3,,0
+9967,ARROUX MORVAN,71,vigilance,1,[],1
+9968,VALLÉE DE LA LOIRE,71,vigilance,1,[],1
+9969,ARCONCE ET SORNIN,71,vigilance,1,[],1
+9970,SEILLE ET GUYOTTE,71,vigilance,1,[],1
+9971,DHEUNE,71,vigilance,1,[],1
+9972,BOURBINCE,71,vigilance,1,[],1
+9973,GROSNE,71,vigilance,1,[],1
+9974,SAÔNE AVAL,71,vigilance,1,,0
+8078,bassin sarthe amont,72,vigilance,1,[],1
+8079,Bassin de la Vaige-Taude-Erve,72,alerte,2,[],1
+8081,bassin Vive-Parence,72,alerte_renforcee,3,[],1
+8082,bassin du Due-Narais,72,alerte_renforcee,3,[],1
+8083,Bassin du Loir,72,vigilance,1,[],1
+8084,Bassin de la Braye,72,alerte_renforcee,3,[],1
+8085,Bassin de l Anille-Veuve-Tusson,72,crise,4,[],1
+8086,Bassin de l Aune,72,crise,4,[],1
+8087,Bassin de l Argance,72,crise,4,[],1
+8089,Bassin de Vaudelle-Merdereau-Orthe,72,alerte,2,[],1
+8091,Bassin de la Sarthe aval,72,vigilance,1,[],1
+8092,Bassin de la Vègre,72,vigilance,1,[],1
+8093,Bassin Affluents de la Sarthe Médiane*,72,alerte_renforcee,3,[],1
+8094,Bassin du Deux-Fonts et de la Voutonne**,72,vigilance,1,[],1
+8095,Bassin de la Gee,72,alerte,2,[],1
+9535,Lac du Bourget – Albanais,73,alerte_renforcee,3,[],1
+9536,Chéran,73,alerte_renforcee,3,[],1
+9537,Combe de Savoie – Val Gelon,73,alerte_renforcee,3,[],1
+9538,Flon – Aiguebelette,73,alerte_renforcee,3,[],1
+9539,Guiers – Chartreuse,73,alerte_renforcee,3,[],1
+9540,Beaufortain – Val D'Arly,73,alerte,2,[],1
+9541,Tarentaise,73,vigilance,1,[],1
+9542,Maurienne,73,vigilance,1,[],1
+9543,Lac du Bourget – Albanais,73,alerte_renforcee,3,[],1
+9544,Chéran,73,alerte_renforcee,3,[],1
+9545,Combe de Savoie – Val Gelon,73,alerte_renforcee,3,[],1
+9546,Flon – Aiguebelette,73,alerte_renforcee,3,[],1
+9547,Guiers – Chartreuse,73,alerte_renforcee,3,[],1
+9548,Beaufortain – Val D'Arly,73,alerte,2,[],1
+9549,Tarentaise,73,vigilance,1,[],1
+9550,Maurienne,73,vigilance,1,[],1
+8650,bassin du Chéran,74,alerte,2,,0
+8651,bassin du Fier,74,alerte,2,,0
+8652,bassin des Usses,74,alerte,2,,0
+8653,bassin du Genevois,74,alerte,2,,0
+8654,bassin de l Arve aval,74,alerte,2,,0
+8655,bassin de l Arve médian,74,alerte,2,,0
+8656,bassin du l Arve amont,74,vigilance,1,,0
+8657,bassin du Sud-Ouest Lémanique,74,alerte,2,,0
+8658,bassin des Dranses,74,alerte,2,,0
+7948,bassin de la Bresle,76,vigilance,1,[],1
+7949,bassins de l'Yères à la Béthune,76,vigilance,1,[],1
+9836,BRESLE,76,vigilance,1,[],1
+9837,YERES - EAULNE - BETHUNE,76,vigilance,1,[],1
+8074,Zone Sud-Ouest,78,vigilance,1,[],1
+8075,Zone Sud-Est,78,vigilance,1,[],1
+8076,Zone Centre,78,vigilance,1,[],1
+8077,Zone Seine,78,vigilance,1,[],1
+9398,Layon - eaux superficielles,79,alerte_renforcee,3,[],1
+9406,Aume Couture - eaux superficielles,79,vigilance,1,[],1
+9407,Boutonne - eaux superficielles,79,vigilance,1,[],1
+9409,Sèvre Niortaise Amont - eaux superficielles,79,alerte_renforcee,3,[],1
+9410,Sèvre Niortaise Moyenne - eaux superficielles,79,alerte_renforcee,3,[],1
+9411,Lambon - eaux superficielles,79,alerte_renforcee,3,[],1
+9412,Marais Mouillé Sèvre Niortaise - eaux superficielles,79,alerte,2,[],1
+9413,Mignon Courance - eaux superficielles,79,alerte_renforcee,3,[],1
+9414,Autize - eaux superficielles,79,alerte,2,[],1
+9415,Vendée - eaux superficielles,79,alerte,2,[],1
+9417,Argenton - eaux superficielles,79,alerte_renforcee,3,[],1
+9418,Thouet Amont - eaux superficielles,79,vigilance,1,[],1
+9419,Thouet Aval - eaux superficielles,79,alerte_renforcee,3,[],1
+9420,Thouaret - eaux superficielles,79,alerte_renforcee,3,[],1
+9421,Layon - eaux souterraines,79,alerte_renforcee,3,[],1
+9429,Aume Couture - eaux souterraines,79,vigilance,1,[],1
+9430,Boutonne - eaux souterraines,79,vigilance,1,[],1
+9432,Sèvre Niortaise Amont - eaux souterraines,79,alerte_renforcee,3,[],1
+9433,Sèvre Niortaise Moyenne - eaux souterraines,79,alerte_renforcee,3,[],1
+9434,Lambon - eaux souterraines,79,alerte_renforcee,3,[],1
+9435,Marais Mouillé Sèvre Niortaise - eaux souterraines,79,alerte,2,[],1
+9436,Mignon Courance - eaux souterraines,79,alerte_renforcee,3,[],1
+9440,Argenton - eaux souterraines,79,alerte_renforcee,3,[],1
+9441,Thouet Amont - eaux souterraines,79,vigilance,1,[],1
+9442,Thouet Aval - eaux souterraines,79,alerte_renforcee,3,[],1
+9443,Thouaret - eaux souterraines,79,alerte_renforcee,3,[],1
+9399,Dive du Nord - eaux superficielles,79,crise,4,,0
+9400,Auxance - eaux superficielles,79,crise,4,,0
+9401,Boivre - eaux superficielles,79,crise,4,,0
+9402,Vonne - eaux superficielles,79,crise,4,,0
+9403,Dive du Sud - eaux superficielles,79,crise,4,,0
+9408,Moine - eaux superficielles,79,alerte_renforcee,3,,0
+9416,Sèvre Nantaise - eaux superficielles,79,alerte_renforcee,3,,0
+9422,Dive du Nord - eaux souterraines,79,crise,4,,0
+9423,Auxance  - eaux souterraines,79,crise,4,,0
+9426,Dive du Sud - eaux souterraines,79,crise,4,,0
+9437,Autize - eaux souterraines,79,vigilance,1,,0
+7198,BASSIN DE LAVRE,80,vigilance,1,[],1
+8022,BASSIN DE LA BRESLE,80,vigilance,1,[],1
+5801,TESCOU,81,crise,4,,0
+5803,L'AGROS,81,crise,4,,0
+5804,L'ASSOU (Le Nandou),81,crise,4,,0
+5806,BAGAS,81,crise,4,,0
+5808,L'EN GUIBAUD,81,crise,4,,0
+5810,GIROU,81,alerte_renforcee,3,,0
+5812,LE BERNAZOBRE,81,crise,4,,0
+5818,LA RANCE,81,alerte,2,,0
+8044,Zone 15 - Bassin de la Lère non réalimentée,82,alerte,2,[],1
+8048,Zone 19 - Aveyron affluents,82,alerte_renforcee,3,[],1
+8051,Zone 23 - Bassin du Tescou non réalimenté,82,alerte_renforcee,3,[],1
+8052,Zone 24 - Bassin du Lemboulas amont,82,crise,4,[],1
+8054,Zone 26 - Bassin Lupte-Lembous,82,crise,4,[],1
+8055,Zone 27 - Tarn affluents,82,alerte_renforcee,3,[],1
+8060,Zone 41 - Bassin de la Sère,82,alerte_renforcee,3,[],1
+8061,Zone 42 - Bassin du Lambon,82,alerte_renforcee,3,[],1
+8062,Zone 43 - Barguelonne amont,82,alerte,2,[],1
+8064,Zone 45 - Bassin du Lendou,82,alerte,2,[],1
+8065,Zone 46 - Bassin de la Petite Barguelonne,82,alerte_renforcee,3,[],1
+8066,Zone 47 - Bassin de la Séoune,82,crise,4,[],1
+8067,Zone 48 - Bassin de l'Auroue,82,alerte_renforcee,3,[],1
+8068,Zone 49 - Garonne affluents,82,alerte_renforcee,3,[],1
+8073,Zone 64 - Gimone affluents,82,alerte_renforcee,3,[],1
+9782,Zone Durance,83,vigilance,1,[],1
+9783,Zone Fleuves côtiers ouest,83,vigilance,1,[],1
+9787,Zone Verdon,83,vigilance,1,[],1
+9788,Zone Nappe basse vallée Argens,83,vigilance,1,[],1
+9789,Zone Nappe Giscle – Môle,83,vigilance,1,[],1
+9779,Zone Arc Amont,83,alerte_renforcee,3,,0
+9780,Zone Argens,83,alerte_renforcee,3,,0
+9781,Zone Artuby-Jabron,83,alerte_renforcee,3,,0
+9784,Zone Gapeau,83,alerte_renforcee,3,,0
+9785,Zone Huveaune Amont,83,crise,4,,0
+8956,10. Bassin versant de l'Æygues,84,alerte,2,[],1
+8957,6.2. Calavon Median,84,alerte_renforcee,3,[],1
+8958,4. bassin versant de la meyne,84,vigilance,1,[],1
+8959,6.1. Calavon Amont,84,alerte_renforcee,3,[],1
+8960,2. Durance nappe d?accompagnement,84,alerte,2,[],1
+8961,12. Rhône,84,vigilance,1,[],1
+8962,5. Sud Luberon,84,alerte_renforcee,3,[],1
+8963,8. Bassin versant de la Nesque,84,alerte_renforcee,3,[],1
+8964,7. Bassin versant du sud-ouest du Mont Ventoux,84,alerte_renforcee,3,[],1
+8965,3. Bassin versant des Sorgues,84,alerte_renforcee,3,[],1
+8967,9. Bassin versant du lez provençal Lauzon,84,alerte_renforcee,3,[],1
+8966,11. Bassin versant de l'Ouvèze provençale,84,alerte_renforcee,3,,0
+6484,Nappe du Lay Ouest,85,vigilance,1,[],1
+6485,Nappe du Lay Est,85,vigilance,1,[],1
+6486,Nappe de la Vendée Ouest,85,vigilance,1,[],1
+6487,Nappe de la Vendée Centre,85,vigilance,1,[],1
+6488,Nappe de la Vendée Est,85,vigilance,1,[],1
+6489,Nappe des Autises,85,vigilance,1,[],1
+7648,Sèvre Nantaise,85,alerte_renforcee,3,[],1
+7649,Maines,85,crise,4,[],1
+7650,Boulogne,85,crise,4,[],1
+7651,Marais Breton,85,crise,4,[],1
+7652,Vie et Jaunay,85,crise,4,[],1
+7653,Côtiers Vendéens,85,crise,4,[],1
+7654,Lay,85,alerte_renforcee,3,[],1
+7657,Vendée,85,alerte,2,[],1
+7658,Marais Vendée,85,vigilance,1,[],1
+7659,Autizes superficiel,85,alerte,2,[],1
+7661,Marais Sèvre Niortaise,85,alerte,2,[],1
+8727,Bassin de la Gartempe - sous bassin de l'Anglin,86,vigilance,1,[],1
+8728,Bassin de la Charente - secteur Charente Amont,86,vigilance,1,[],1
+8729,Bassin de la Creuse,86,crise,4,[],1
+8730,Bassin de la Gartempe,86,vigilance,1,[],1
+8731,Bassin de la Vienne Tourangelle - sous bassin de la Veude et du Négron,86,crise,4,[],1
+8732,Bassin du Clain - sous bassin de l'Auxance,86,crise,4,[],1
+8733,Bassin du Clain - sous bassin de la Clouère,86,crise,4,[],1
+8734,Bassin du Clain - sous bassin de la Pallu,86,crise,4,[],1
+8735,Bassin du Clain - sous bassin de la Vonne,86,crise,4,[],1
+8736,Bassin du Clain - sous bassin de la Boivre,86,crise,4,[],1
+8737,Bassin du Clain - sous bassin de la Dive du Sud et de la Bouleure,86,crise,4,[],1
+8739,Bassin de la Dive du Nord - secteur de La Grimaudière,86,crise,4,[],1
+8740,Bassin de la Dive du Nord - secteur du Prepson,86,crise,4,[],1
+8741,Bassin de la Vienne - sous-bassin de l'Envigne,86,crise,4,[],1
+8742,Bassin de la Vienne - sous-bassin Clain - Creuse,86,alerte_renforcee,3,[],1
+8743,Bassin de la Vienne - sous-bassin de l'Ozon,86,alerte_renforcee,3,[],1
+8744,Bassin de la Vienne - sous-bassin Talbat - Clain,86,alerte_renforcee,3,[],1
+8745,Bassin de la Vienne - sous-bassin Blourde-Talbat,86,alerte_renforcee,3,[],1
+8746,Bassin de la Vienne - sous-bassin Issoire - Blourde,86,alerte_renforcee,3,[],1
+8747,Bassin de la Vienne - sous-bassin des Blourdes,86,alerte_renforcee,3,[],1
+8748,Bassin de la Dive du Nord - secteur de la Petite Maine,86,crise,4,[],1
+8749,Bassin de la Dive du Nord - secteur de  la Dive canalisée,86,crise,4,[],1
+8750,Bassin de la Dive du Nord - secteur des sources de la Dive,86,crise,4,[],1
+8751,Bassin de la Dive du Nord - secteur de la Briande,86,crise,4,[],1
+8752,Bassin de la Dive du Nord - secteur du Marais de la Dive,86,crise,4,[],1
+8753,Bassin du Clain - sous bassin du Clain Aval,86,crise,4,[],1
+8754,Bassin du Clain - sous bassin du Clain Amont,86,crise,4,[],1
+8755,Bassin de la Gartempe - sous bassin de l'Anglin,86,vigilance,1,[],1
+8756,Bassin de la Charente - secteur Charente Amont,86,vigilance,1,[],1
+8757,Bassin de la Creuse,86,crise,4,[],1
+8758,Bassin de la Gartempe,86,vigilance,1,[],1
+8759,Bassin de la Vienne Tourangelle - sous bassin de la Veude et du Négron,86,crise,4,[],1
+8760,Bassin du Clain - sous bassin de l'Auxance,86,crise,4,[],1
+8761,Bassin du Clain - sous bassin de la Clouère,86,crise,4,[],1
+8762,Bassin du Clain - sous bassin de la Pallu,86,crise,4,[],1
+8763,Bassin du Clain - sous bassin de la Vonne,86,crise,4,[],1
+8764,Bassin du Clain - sous bassin de la Boivre,86,crise,4,[],1
+8765,Bassin du Clain - sous bassin de la Dive du Sud et de la Bouleure,86,crise,4,[],1
+8767,Bassin de la Dive du Nord - secteur de La Grimaudière,86,crise,4,[],1
+8768,Bassin de la Dive du Nord - secteur du Prepson,86,crise,4,[],1
+8769,Bassin de la Vienne - sous-bassin de l'Envigne,86,crise,4,[],1
+8770,Bassin de la Vienne - sous-bassin Clain - Creuse,86,alerte_renforcee,3,[],1
+8771,Bassin de la Vienne - sous-bassin de l'Ozon,86,alerte,2,[],1
+8772,Bassin de la Vienne - sous-bassin Talbat - Clain,86,alerte_renforcee,3,[],1
+8773,Bassin de la Vienne - sous-bassin Blourde-Talbat,86,alerte_renforcee,3,[],1
+8774,Bassin de la Vienne - sous-bassin Issoire - Blourde,86,alerte_renforcee,3,[],1
+8775,Bassin de la Vienne - sous-bassin des Blourdes,86,alerte_renforcee,3,[],1
+8776,Bassin de la Dive du Nord - secteur de la Petite Maine,86,crise,4,[],1
+8777,Bassin de la Dive du Nord - secteur de  la Dive canalisée,86,crise,4,[],1
+8778,Bassin de la Dive du Nord - secteur des sources de la Dive,86,crise,4,[],1
+8779,Bassin de la Dive du Nord - secteur de la Briande,86,crise,4,[],1
+8780,Bassin de la Dive du Nord - secteur du Marais de la Dive,86,crise,4,[],1
+8781,Bassin du Clain - sous bassin du Clain Aval,86,crise,4,[],1
+8782,Bassin du Clain - sous bassin du Clain Amont,86,crise,4,[],1
+4065,Bassin_GARTEMPE_CREUSE,87,vigilance,1,[],1
+4066,Bassin_VIENNE_AVAL,87,vigilance,1,[],1
+4067,Bassin_CHARENTE_ISLE_DRONNE,87,vigilance,1,[],1
+4068,Bassin_VIENNE_AMONT,87,vigilance,1,[],1
+4623,zone non couverte par l'arrêté cadre,87,vigilance,1,[],1
+7339,Moselle amont et Meurthe partie du département 88,88,alerte,2,,0
+7340,Meuse amont et médiane partie du département 88,88,vigilance,1,,0
+7341,Saône amont,88,alerte_renforcee,3,,0
+8281,Bassin du Cousin,89,alerte,2,[],1
+8282,Bassin de la Vanne,89,alerte,2,[],1
+8283,Seine Est,89,alerte,2,[],1
+8284,Bassin du Serein,89,alerte,2,[],1
+8285,Bassin de l' Amont Armançon,89,alerte,2,[],1
+8286,Bassin Yonne Aval,89,vigilance,1,[],1
+8287,Bassin Yonne Amont,89,vigilance,1,[],1
+8288,Bassin du Tholon-Ravillon-Vrin-Ocques,89,vigilance,1,[],1
+8289,Bassin de la Cure,89,vigilance,1,[],1
+8290,Loire,89,alerte,2,[],1
+8291,Bassin du Loing-Ouanne,89,alerte,2,[],1
+8292,Seine,89,vigilance,1,[],1
+8293,Bassin de l' Aval Armançon,89,alerte,2,[],1
+8294,Bassin des petits cours d'eau Nord,89,alerte,2,[],1
+3651,bassin versant de l'Allan_dpt 90,90,alerte,2,,0
+8441,"Orge et ses affluents, exeptes Yvette et ses affluents",91,alerte,2,[],1
+8445,Double rattachement: Orge-Remarde et affluents_Seine essonnienne et petits affluents directs,91,alerte,2,[],1
+8446,Double rattachement: Orge-Remarde_Yvette-Bievre et affluents,91,alerte,2,[],1
+8280,Zone 2a (94),94,vigilance,1,,0
+5663,BASSIN VERSANT DE LA PLAINE DE FRANCE ET DU PARISIS,95,alerte,2,,0

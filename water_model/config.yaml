@@ -1,0 +1,177 @@
+# ============================================================
+# GreenDC — Water Stress Model Configuration
+# ============================================================
+
+project:
+  name: GreenDC Water Stress Model
+  version: 1.0.0
+  crs_geographic: EPSG:4326
+  crs_metric: EPSG:2154           # RGF93 Lambert-93 (France métropolitaine)
+  bbox_france: [-5.2, 41.2, 9.8, 51.2]   # [minlon, minlat, maxlon, maxlat]
+
+# --- Masque géographique France métropolitaine ---
+# Un polygone simplifié (~40 sommets) délimite l'emprise France.
+# Un buffer de 10 km est appliqué autour de ce polygone afin d'absorber
+# les incertitudes induites par :
+#   - la discrétisation raster (centre de pixel ≠ frontière réelle),
+#   - les transformations géométriques (projection L93↔WGS84, interpolation),
+#   - la résolution source ERA5 (~28 km) projetée sur grille 5 km.
+# Ce buffer constitue une marge conservative d'implémentation, et non une
+# distance physique interprétable. Il est calibré à ~2× la demi-résolution
+# de la grille cible (5 km / 2 = 2.5 km, arrondi à 10 km pour marge).
+# Pour un produit de production, remplacer par le shapefile IGN AdminExpress
+# ou Natural Earth 10m (rasterisation exacte sur la grille cible).
+france_mask:
+  buffer_km: 10.0
+  source: "polygone simplifié ~40 points (preprocessing/resampling.py)"
+  upgrade_path: "IGN AdminExpress ou Natural Earth 10m shapefile"
+
+# --- Grilles spatiales (identiques au modèle carbone) ---
+grids:
+  high:
+    resolution_km: 5
+    interpolation: bilinear
+  medium:
+    resolution_km: 15
+    interpolation: bilinear
+  low:
+    resolution_km: 30
+    interpolation: nearest
+
+# --- Modèle Water Stress Index ---
+wsi:
+  # Pondérations (somme = 1.0)
+  weights:
+    bws:     0.60   # Baseline Water Stress (Aqueduct 4.0)
+    gws:     0.25   # Groundwater Stress (Aqueduct + BRGM)
+    drought: 0.15   # Drought Risk (SPI-12 depuis ERA5)
+
+  # Normalisation BWS Aqueduct 4.0
+  # 'pfister' = logistique Pfister et al. (2009), peer-reviewed
+  # 'linear'  = BWS / bws_max (naïf)
+  # 'sigmoid' = sigmoïde custom
+  bws_normalization: linear
+  bws_score_max: 5.0
+
+  # Modulation locale BNPE (prélèvements réels France)
+  # BWS_final = BWS_pfister + (1 - BWS_pfister) × bnpe_weight × BNPE_stress
+  # Justification poids 0.35 :
+  #   - Aqueduct 4.0 (Kuzma et al. 2023) : ajustements locaux ~20-30% du score
+  #   - Vörösmarty et al. (2010) : corrections locales ~30-40% de la variance
+  #   - BNPE redistribue le stress sans modifier la moyenne nationale
+  bnpe_weight: 0.50
+
+  # Groundwater stress : 0-5 → 0-1
+  gws_score_max: 5.0
+
+  # SPI pour drought risk
+  # SPI ≤ spi_dry_threshold → stress croissant
+  spi_dry_threshold:  -1.0   # SPI < -1 = sécheresse modérée (OMM)
+  spi_very_dry:       -2.0   # SPI < -2 = sécheresse extrême
+  # SPI-N utilisé (N mois, hydrologique)
+  spi_window_months: 12
+
+  # Période de référence pour le calcul de SPI (climatologie)
+  spi_baseline_start: 1981
+  spi_baseline_end:   2010
+
+  # Score final
+  score_min: 0.0
+  score_max: 100.0
+
+# --- Aqueduct 4.0 (WRI) ---
+aqueduct:
+  # Variables à extraire (codes internes Aqueduct)
+  variables:
+    bws: "bws_raw"          # Baseline water stress
+    gws: "gws_raw"          # Groundwater depletion
+    sev: "sev_raw"          # Seasonal variability
+    drr: "drr_raw"          # Drought risk (Aqueduct native)
+    rfr: "rfr_raw"          # Riverine flood risk
+
+  # Seuil pour masquer les zones sans données (ex: désert, ocean)
+  nodata_sentinel: -9999.0
+
+  # Résolution source ≈ 5 arc-minutes (~10 km)
+  native_resolution_deg: 0.0833
+
+# --- ERA5 via Copernicus CDS ---
+era5:
+  variables:
+    - total_precipitation       # tp [m/s]
+    - potential_evaporation     # pev [m]
+    - 2m_temperature            # t2m [K]
+  grid_resolution: 0.25         # degrés (~28 km)
+  # CDS API : configurer ~/.cdsapirc avec uid et key
+
+# --- BRGM BDLISA ---
+# Mappings de stress souterrain définis dans downloaders/download_brgm.py
+# (milieueh + themeeh BDLISA v3, pas de duplication ici)
+
+# --- Hub'Eau Piézométrie (temps réel) ---
+hubeau_piezo:
+  enabled: true
+  base_url: "https://hubeau.eaufrance.fr/api/v1/niveaux_nappes"
+  baseline_years: 20          # Historique pour calculer la moyenne
+  min_mesures_baseline: 120   # Minimum de mesures pour la baseline
+  min_mesures_recentes: 6     # Minimum de mesures récentes
+  # Poids dans le GWS v1.1
+  gws_weights_v11:
+    aqueduct: 0.40
+    brgm: 0.30
+    piezo: 0.30
+
+# --- Validation hydro ---
+validation:
+  # Stations Banque Hydro pour comparaison débit observé vs modélisé
+  use_banque_hydro: true
+  banque_hydro_url: "https://hubeau.eaufrance.fr/api/v1/hydrometrie"
+
+  # Seuils qualité
+  pearson_r_min: 0.65         # Corrélation min acceptable
+  max_normalized_rmse: 0.30   # RMSE normalisé max
+  bias_tolerance: 0.20        # Biais systématique max (20%)
+
+  # Stations de validation prioritaires (code Banque Hydro)
+  reference_stations:
+    - {id: "A1621010", name: "Loire à Orléans"}
+    - {id: "K1550010", name: "Garonne à Tonneins"}
+    - {id: "H1400210", name: "Seine à Paris"}
+    - {id: "E5650010", name: "Rhin à Strasbourg"}
+
+# --- Performance / Dask ---
+dask:
+  scheduler: synchronous      # 'synchronous' | 'threads' | 'processes'
+  n_workers: 4
+  chunk_lat: 100
+  chunk_lon: 100
+
+# --- Paths (relatifs à water_model/) ---
+paths:
+  raw_data:       data/raw
+  processed_data: data/processed
+  outputs:        data/outputs
+
+  # Aqueduct
+  aqueduct_zip:   data/raw/aqueduct/aqueduct40_annual.zip
+  aqueduct_gpkg:  data/raw/aqueduct/aqueduct40_annual.gpkg
+  aqueduct_bws:   data/raw/aqueduct/bws_raw.tif
+  aqueduct_gws:   data/raw/aqueduct/gws_raw.tif
+  aqueduct_drr:   data/raw/aqueduct/drr_raw.tif
+
+  # BRGM
+  brgm_bdlisa:    data/raw/brgm/bdlisa_v3.gpkg
+
+  # ERA5
+  era5_precip:    data/raw/era5/total_precipitation_{year}.nc
+  era5_pet:       data/raw/era5/potential_evaporation_{year}.nc
+
+  # Rasters prétraités (EPSG:2154, 5 km)
+  bws_clean:      data/processed/bws_france_5km.tif
+  gws_clean:      data/processed/gws_france_5km.tif
+  drought_clean:  data/processed/drought_spi12_france_5km.nc
+
+  # Outputs finaux
+  wsi_5km:        data/outputs/water_stress_5km_{year}.nc
+  wsi_15km:       data/outputs/water_stress_15km_{year}.nc
+  wsi_30km:       data/outputs/water_stress_30km_{year}.nc

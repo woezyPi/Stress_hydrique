@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenDC — Water Stress Index</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
+
+        :root {
+            --bg: #ffffff;
+            --panel: #fafafa;
+            --card: #ffffff;
+            --border: #e0e0e0;
+            --border-light: #eeeeee;
+            --text: #1a1a1a;
+            --text2: #555555;
+            --text3: #888888;
+            --blue: #1f77b4;
+            --orange: #ff7f0e;
+            --green: #2ca02c;
+            --red: #d62728;
+            --purple: #9467bd;
+            --cyan: #17becf;
+            --brown: #8c564b;
+            --grey: #7f7f7f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* Layout */
+        .app {
+            display: grid;
+            grid-template-rows: 48px 1fr;
+            grid-template-columns: 1fr 540px;
+            height: 100vh;
+        }
+
+        /* ── Topbar ── */
+        .topbar {
+            grid-column: 1 / -1;
+            background: #ffffff;
+            border-bottom: 2px solid #1a1a1a;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            gap: 16px;
+        }
+        .topbar h1 {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            font-weight: 600;
+            color: #1a1a1a;
+            letter-spacing: -0.3px;
+            white-space: nowrap;
+        }
+        .topbar .sep {
+            width: 1px;
+            height: 24px;
+            background: var(--border);
+        }
+        .cities {
+            display: flex;
+            gap: 3px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+        }
+        .cb {
+            padding: 4px 10px;
+            border-radius: 2px;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text2);
+            cursor: pointer;
+            font-size: 11px;
+            font-family: 'IBM Plex Mono', monospace;
+            white-space: nowrap;
+            transition: all 0.1s;
+        }
+        .cb:hover {
+            background: #1a1a1a;
+            color: #ffffff;
+            border-color: #1a1a1a;
+        }
+        .cb.active {
+            background: #1a1a1a;
+            color: #ffffff;
+            border-color: #1a1a1a;
+        }
+        .topbar .formula-hint {
+            margin-left: auto;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            color: var(--text3);
+            white-space: nowrap;
+            letter-spacing: -0.2px;
+        }
+
+        /* ── Map area ── */
+        .map-area { position: relative; overflow: hidden; }
+        #map { width: 100%; height: 100%; }
+
+        /* Legend overlay */
+        .legend {
+            position: absolute;
+            bottom: 56px;
+            left: 20px;
+            z-index: 1000;
+            background: rgba(255,255,255,0.94);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 10px 14px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .legend-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            margin-bottom: 6px;
+        }
+        .legend-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text2);
+            margin-top: 3px;
+        }
+
+        /* Coords overlay */
+        .coords-overlay {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            z-index: 1000;
+            display: flex;
+            gap: 4px;
+            align-items: center;
+        }
+        .coords-overlay input {
+            width: 96px;
+            padding: 6px 8px;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            background: rgba(255,255,255,0.94);
+            color: var(--text);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .coords-overlay input:focus {
+            outline: none;
+            border-color: #1a1a1a;
+        }
+        .coords-overlay button {
+            padding: 6px 14px;
+            border: 1px solid #1a1a1a;
+            border-radius: 2px;
+            background: #1a1a1a;
+            color: #ffffff;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 11px;
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        .coords-overlay button:hover {
+            background: #333333;
+        }
+
+        /* Loading overlay */
+        .map-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001;
+            background: rgba(255,255,255,0.92);
+            padding: 10px 20px;
+            border-radius: 2px;
+            border: 1px solid var(--border);
+            font-size: 12px;
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text2);
+            display: none;
+        }
+
+        /* ── Right panel ── */
+        .panel {
+            background: var(--panel);
+            border-left: 2px solid #1a1a1a;
+            overflow-y: auto;
+            padding: 0;
+        }
+        .panel::-webkit-scrollbar { width: 6px; }
+        .panel::-webkit-scrollbar-track { background: transparent; }
+        .panel::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+
+        .panel-section {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+        .panel-title {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1.8px;
+            color: var(--text3);
+            margin-bottom: 14px;
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 6px;
+        }
+
+        /* ── Hero score ── */
+        .hero { display: flex; align-items: center; gap: 20px; }
+        .hero-score {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 54px;
+            font-weight: 600;
+            line-height: 1;
+        }
+        .hero-unit {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 14px;
+            color: var(--text3);
+            margin-top: 2px;
+        }
+        .hero-right { flex: 1; }
+        .hero-city {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .hero-badge {
+            display: inline-block;
+            padding: 2px 10px;
+            border-radius: 2px;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'IBM Plex Mono', monospace;
+            margin-top: 4px;
+        }
+        .hero-desc {
+            font-size: 12px;
+            color: var(--text2);
+            margin-top: 6px;
+            line-height: 1.5;
+        }
+        .hero-coords {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            color: var(--text3);
+            margin-top: 4px;
+        }
+
+        /* ── Metric cards ── */
+        .metrics { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        .metric {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 14px;
+            position: relative;
+        }
+        .metric-label {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            color: var(--text3);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        .metric-val {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 24px;
+            font-weight: 600;
+            margin: 6px 0 4px;
+        }
+        .metric-weight {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            color: var(--text3);
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        .metric-bar {
+            height: 3px;
+            background: #eeeeee;
+            border-radius: 1px;
+            margin-top: 8px;
+        }
+        .metric-fill { height: 100%; border-radius: 1px; }
+        .metric-src {
+            font-size: 9px;
+            color: var(--text3);
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        /* ── Chart wrappers ── */
+        .chart-wrap {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            padding: 16px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+        }
+        .chart-container canvas {
+            max-width: 100% !important;
+            max-height: 100% !important;
+        }
+        .chart-container.sm { height: 130px; }
+        .chart-container.md { height: 180px; }
+        .chart-container.lg { height: 200px; }
+        .chart-header {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text2);
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 8px;
+        }
+        .chart-header .tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 9px;
+            color: var(--text3);
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 2px;
+            border: 1px solid var(--border-light);
+        }
+        .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        @media (max-width: 1200px) {
+            .app { grid-template-columns: 1fr 420px; }
+            .chart-row { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 900px) {
+            .app { grid-template-columns: 1fr; grid-template-rows: 48px 40vh 1fr; }
+            .chart-row { grid-template-columns: 1fr 1fr; }
+        }
+
+        /* ── Data table ── */
+        .dtable { width: 100%; border-collapse: collapse; font-size: 12px; }
+        .dtable th {
+            text-align: left;
+            padding: 6px 10px;
+            font-family: 'IBM Plex Mono', monospace;
+            color: var(--text3);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            border-bottom: 2px solid #1a1a1a;
+            font-weight: 600;
+        }
+        .dtable th:last-child { text-align: right; }
+        .dtable td {
+            padding: 5px 10px;
+            border-bottom: 1px solid var(--border-light);
+            font-size: 12px;
+        }
+        .dtable td:last-child {
+            text-align: right;
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 500;
+        }
+        .dtable tr:hover { background: #f8f8f8; }
+
+        /* ── Formula block ── */
+        .formula-block {
+            background: #f8f8f8;
+            border-left: 3px solid #1a1a1a;
+            border-radius: 0 2px 2px 0;
+            padding: 14px 18px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            line-height: 2;
+            color: var(--text2);
+        }
+        .formula-block .cite {
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-size: 10px;
+            color: var(--text3);
+            margin-top: 8px;
+            font-style: italic;
+        }
+
+        /* ── Placeholder ── */
+        .ph {
+            color: var(--text3);
+            text-align: center;
+            padding: 60px 20px;
+            font-size: 13px;
+        }
+        .ph code {
+            background: #f5f5f5;
+            padding: 3px 10px;
+            border-radius: 2px;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            border: 1px solid var(--border-light);
+        }
+
+        /* ── Timeline bar (bottom of map) ── */
+        .timeline {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(26,26,26,0.92);
+            backdrop-filter: blur(8px);
+            padding: 8px 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .tl-year {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+            min-width: 42px;
+            text-align: center;
+            cursor: default;
+        }
+        .tl-sep {
+            width: 1px;
+            height: 20px;
+            background: rgba(255,255,255,0.2);
+            margin: 0 4px;
+        }
+        .tl-month {
+            flex: 1;
+            padding: 5px 0;
+            border: none;
+            border-radius: 2px;
+            background: transparent;
+            color: rgba(255,255,255,0.5);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.1s;
+        }
+        .tl-month:hover {
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+        }
+        .tl-month.active {
+            background: #ffffff;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+        .tl-annual {
+            padding: 5px 12px;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 2px;
+            background: transparent;
+            color: rgba(255,255,255,0.7);
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.1s;
+            white-space: nowrap;
+        }
+        .tl-annual:hover {
+            background: rgba(255,255,255,0.1);
+            color: #ffffff;
+        }
+        .tl-annual.active {
+            background: #ffffff;
+            color: #1a1a1a;
+            border-color: #ffffff;
+        }
+
+        /* ── Chart fullscreen ── */
+        .chart-expand {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 24px;
+            height: 24px;
+            border: 1px solid var(--border);
+            border-radius: 2px;
+            background: var(--card);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text3);
+            font-size: 12px;
+            z-index: 2;
+            transition: all 0.1s;
+        }
+        .chart-expand:hover {
+            background: #1a1a1a;
+            color: #ffffff;
+            border-color: #1a1a1a;
+        }
+        .chart-fullscreen {
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            z-index: 10000 !important;
+            margin: 0 !important;
+            border-radius: 0 !important;
+            padding: 24px !important;
+            display: flex;
+            flex-direction: column;
+        }
+        .chart-fullscreen .chart-container {
+            flex: 1 !important;
+            height: auto !important;
+        }
+        .chart-fullscreen .chart-expand {
+            top: 16px;
+            right: 16px;
+        }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed;
+            top: 56px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--red);
+            color: #fff;
+            padding: 8px 24px;
+            border-radius: 2px;
+            font-size: 12px;
+            font-family: 'IBM Plex Mono', monospace;
+            z-index: 9999;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="toast" id="toast"></div>
+
+<div class="app">
+    <!-- Topbar -->
+    <div class="topbar">
+        <h1>GreenDC // Water Stress</h1>
+        <div class="sep"></div>
+        <div class="cities" id="cityBar">
+            <button class="cb" data-city="Paris" onclick="q(48.86,2.35,'Paris')">Paris</button>
+            <button class="cb" data-city="Lyon" onclick="q(45.76,4.83,'Lyon')">Lyon</button>
+            <button class="cb" data-city="Marseille" onclick="q(43.30,5.37,'Marseille')">Marseille</button>
+            <button class="cb" data-city="Lille" onclick="q(50.63,3.06,'Lille')">Lille</button>
+            <button class="cb" data-city="Nice" onclick="q(43.70,7.27,'Nice')">Nice</button>
+            <button class="cb" data-city="Perpignan" onclick="q(42.70,2.90,'Perpignan')">Perpignan</button>
+            <button class="cb" data-city="Rennes" onclick="q(48.11,-1.68,'Rennes')">Rennes</button>
+            <button class="cb" data-city="Strasbourg" onclick="q(48.58,7.75,'Strasbourg')">Strasbourg</button>
+            <button class="cb" data-city="Toulouse" onclick="q(43.60,1.44,'Toulouse')">Toulouse</button>
+            <button class="cb" data-city="Nantes" onclick="q(47.22,-1.55,'Nantes')">Nantes</button>
+            <button class="cb" data-city="Bordeaux" onclick="q(44.84,-0.58,'Bordeaux')">Bordeaux</button>
+        </div>
+        <div class="formula-hint">Score = 100 &minus; (60% rivi&egrave;res + 25% nappes + 15% s&eacute;cheresse)</div>
+    </div>
+
+    <!-- Map -->
+    <div class="map-area">
+        <div class="coords-overlay">
+            <input type="number" id="lat" step="0.01" value="46.50" placeholder="lat">
+            <input type="number" id="lon" step="0.01" value="2.50" placeholder="lon">
+            <button onclick="qInput()">Query</button>
+        </div>
+        <div id="map"></div>
+        <div class="legend">
+            <div class="legend-title">Water Score</div>
+            <canvas id="legendBar" width="200" height="12"></canvas>
+            <div class="legend-labels"><span>0 Critique</span><span>50</span><span>100 Excellent</span></div>
+        </div>
+        <!-- Timeline -->
+        <div class="timeline" id="timeline">
+            <span class="tl-year" id="tlYear">2022</span>
+            <div class="tl-sep"></div>
+            <button class="tl-annual active" id="tlAnnual" onclick="selectPeriod('')">MOY</button>
+            <div class="tl-sep"></div>
+            <button class="tl-month" data-m="1" onclick="selectPeriod('1')">Jan</button>
+            <button class="tl-month" data-m="2" onclick="selectPeriod('2')">Fev</button>
+            <button class="tl-month" data-m="3" onclick="selectPeriod('3')">Mar</button>
+            <button class="tl-month" data-m="4" onclick="selectPeriod('4')">Avr</button>
+            <button class="tl-month" data-m="5" onclick="selectPeriod('5')">Mai</button>
+            <button class="tl-month" data-m="6" onclick="selectPeriod('6')">Jun</button>
+            <button class="tl-month" data-m="7" onclick="selectPeriod('7')">Jul</button>
+            <button class="tl-month" data-m="8" onclick="selectPeriod('8')">Aou</button>
+            <button class="tl-month" data-m="9" onclick="selectPeriod('9')">Sep</button>
+            <button class="tl-month" data-m="10" onclick="selectPeriod('10')">Oct</button>
+            <button class="tl-month" data-m="11" onclick="selectPeriod('11')">Nov</button>
+            <button class="tl-month" data-m="12" onclick="selectPeriod('12')">Dec</button>
+        </div>
+    </div>
+
+    <!-- Panel -->
+    <div class="panel" id="panel">
+        <div class="panel-section">
+            <div class="ph" id="ph">
+                Cliquez sur la carte ou selectionnez une ville.<br><br>
+                <code>query(lat, lon) &rarr; WaterScore [0&ndash;100]</code>
+            </div>
+            <div id="result" style="display:none"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+// ── Matplotlib tab10 palette ──
+const C = {
+    blue:   '#1f77b4',
+    orange: '#ff7f0e',
+    green:  '#2ca02c',
+    red:    '#d62728',
+    purple: '#9467bd',
+    brown:  '#8c564b',
+    grey:   '#7f7f7f',
+    cyan:   '#17becf'
+};
+
+// ── Color scale (0-100 water score) — muted scientific ──
+function wsColor(s) {
+    if (s >= 80) return [44, 160, 44];    // mpl green
+    if (s >= 65) return [31, 119, 180];   // mpl blue
+    if (s >= 50) return [255, 127, 14];   // mpl orange
+    if (s >= 35) return [214, 39, 40];    // mpl red
+    return [148, 103, 189];                // mpl purple (critical)
+}
+function wsHex(s) {
+    const c = wsColor(s);
+    return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+function wsLevel(s) {
+    if (s >= 80) return 'Excellent';
+    if (s >= 65) return 'Bon';
+    if (s >= 50) return 'Modere';
+    if (s >= 35) return 'Defavorable';
+    return 'Critique';
+}
+function wsBadgeBg(s) {
+    if (s >= 80) return '#2ca02c';
+    if (s >= 65) return '#1f77b4';
+    if (s >= 50) return '#ff7f0e';
+    if (s >= 35) return '#d62728';
+    return '#9467bd';
+}
+
+// ── Chart.js defaults — Matplotlib style ──
+Chart.register(ChartDataLabels);
+Chart.defaults.font.family = "'IBM Plex Mono', monospace";
+Chart.defaults.font.size = 11;
+Chart.defaults.color = '#555555';
+Chart.defaults.borderColor = '#e0e0e0';
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.pointStyle = 'rect';
+Chart.defaults.plugins.datalabels.display = false;  // off by default, enabled per chart
+
+// ── Map — dark basemap ──
+const map = L.map('map', { zoomControl: false }).setView([46.8, 2.5], 6);
+L.control.zoom({ position: 'topright' }).addTo(map);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: 'CartoDB',
+    maxZoom: 18
+}).addTo(map);
+map.setMaxBounds([[40, -7], [52.5, 12]]);
+map.setMinZoom(5);
+
+let marker = null;
+
+map.on('click', e => q(e.latlng.lat, e.latlng.lng));
+
+// ── Timeline: month/year selection ──
+let currentMonth = '';  // '' = annual
+
+function selectPeriod(m) {
+    currentMonth = m;
+    // Update timeline active state
+    document.getElementById('tlAnnual').classList.toggle('active', m === '');
+    document.querySelectorAll('.tl-month').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.m === m);
+    });
+    // Re-query current point if selected
+    const la = +document.getElementById('lat').value;
+    const lo = +document.getElementById('lon').value;
+    if (la && lo && marker) q(la, lo);
+}
+
+// ── Chart fullscreen toggle ──
+function toggleFullscreen(btn) {
+    const wrap = btn.closest('.chart-wrap');
+    const isFS = wrap.classList.contains('chart-fullscreen');
+    wrap.classList.toggle('chart-fullscreen');
+    btn.textContent = isFS ? '\u26F6' : '\u2715';
+    // Resize chart after layout change
+    const canvas = wrap.querySelector('canvas');
+    if (canvas && canvas.__chartjs) {
+        setTimeout(() => {
+            const chart = Chart.getChart(canvas);
+            if (chart) chart.resize();
+        }, 50);
+    }
+    // ESC to close
+    if (!isFS) {
+        const handler = (e) => {
+            if (e.key === 'Escape') {
+                wrap.classList.remove('chart-fullscreen');
+                btn.textContent = '\u26F6';
+                const chart = Chart.getChart(canvas);
+                if (chart) setTimeout(() => chart.resize(), 50);
+                document.removeEventListener('keydown', handler);
+            }
+        };
+        document.addEventListener('keydown', handler);
+    }
+}
+
+// ── Legend gradient ──
+(function() {
+    const cv = document.getElementById('legendBar');
+    const ctx = cv.getContext('2d');
+    const grad = ctx.createLinearGradient(0, 0, 200, 0);
+    grad.addColorStop(0.00, 'rgb(148,103,189)');
+    grad.addColorStop(0.35, 'rgb(214,39,40)');
+    grad.addColorStop(0.50, 'rgb(255,127,14)');
+    grad.addColorStop(0.65, 'rgb(31,119,180)');
+    grad.addColorStop(1.00, 'rgb(44,160,44)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 200, 12);
+})();
+
+// ── Heatmap (disabled) ──
+async function loadHeatmap() {}
+
+
+// ── Toast ──
+function toast(m) {
+    const t = document.getElementById('toast');
+    t.textContent = m;
+    t.style.display = 'block';
+    setTimeout(() => t.style.display = 'none', 3000);
+}
+
+function qInput() {
+    const la = +document.getElementById('lat').value;
+    const lo = +document.getElementById('lon').value;
+    if (la && lo) q(la, lo);
+}
+
+// ── Charts state ──
+let cBar = null, cRadar = null, cWater = null, cMonthly = null;
+
+// ── Activate city button ──
+function setActiveCity(name) {
+    document.querySelectorAll('#cityBar .cb').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.city === name);
+    });
+}
+
+// ── Query ──
+async function q(lat, lon, name) {
+    document.getElementById('lat').value = lat.toFixed(4);
+    document.getElementById('lon').value = lon.toFixed(4);
+
+    // Set active city button (clear if manual click)
+    setActiveCity(name || '');
+
+    if (marker) map.removeLayer(marker);
+    marker = L.circleMarker([lat, lon], {
+        radius: 7, color: '#ffffff', fillColor: '#ffffff',
+        fillOpacity: 1, weight: 2
+    }).addTo(map);
+
+    document.getElementById('ph').style.display = 'none';
+    const R = document.getElementById('result');
+    R.style.display = 'block';
+    R.innerHTML = '<div class="ph">Calcul en cours...</div>';
+    document.getElementById('panel').scrollTop = 0;
+
+    try {
+        const m = currentMonth;
+        const url = m ? `/api/query?lat=${lat}&lon=${lon}&month=${m}` : `/api/query?lat=${lat}&lon=${lon}`;
+        const r = await fetch(url);
+        const d = await r.json();
+        if (d.error) {
+            toast(d.error);
+            R.innerHTML = `<div class="ph" style="color:var(--red)">${d.error}</div>`;
+            return;
+        }
+        if (d.water_score == null) {
+            R.innerHTML = '<div class="ph" style="color:var(--red)">Pas de donnees pour ce point.</div>';
+            return;
+        }
+        marker.setStyle({ color: wsHex(d.water_score), fillColor: wsHex(d.water_score) });
+        render(d, name);
+    } catch (e) {
+        R.innerHTML = `<div class="ph" style="color:var(--red)">${e.message}</div>`;
+    }
+}
+
+function render(d, cityName) {
+    const ws = d.water_score;
+    const c = d.components || {};
+    const g = d.nearest_grid || {};
+    const interp = d.interpretation || {};
+    const title = cityName || `${d.query.lat.toFixed(2)}N, ${d.query.lon.toFixed(2)}E`;
+
+    const bws = c.bws_norm || 0;
+    const gws = c.gws_norm || 0;
+    const dr = c.drought_norm || c.drought_norm_mean || 0;
+    const bws_w = bws * 0.60;
+    const gws_w = gws * 0.25;
+    const dr_w = dr * 0.15;
+    const wsi = c.wsi || c.wsi_mean || 0;
+    const distKm = g.distance_km != null ? g.distance_km + ' km' : '—';
+    const monthNames = ['','Jan','Fev','Mar','Avr','Mai','Jun','Jul','Aou','Sep','Oct','Nov','Dec'];
+    const modeLabel = d.mode && d.mode.startsWith('month_') ? monthNames[parseInt(d.mode.split('_')[1])] + ' ' + (d.query.year||2022) : 'Annuel ' + (d.query.year||2022);
+
+    document.getElementById('result').innerHTML = `
+        <!-- Hero -->
+        <div class="hero">
+            <div>
+                <div class="hero-score" style="color:${wsHex(ws)}">${ws.toFixed(1)}</div>
+                <div class="hero-unit">/ 100</div>
+            </div>
+            <div class="hero-right">
+                <div class="hero-city">${title}</div>
+                <div class="hero-badge" style="background:${wsBadgeBg(ws)};color:#fff">${wsLevel(ws)}</div>
+                <div class="hero-desc">${interp.description || ''}</div>
+                <div class="hero-coords">${modeLabel} &middot; grid: ${g.lat || '—'}, ${g.lon || '—'} (${distKm})</div>
+            </div>
+        </div>
+
+        <!-- Metrics -->
+        <div style="margin-top:20px">
+            <div class="panel-title">Composantes</div>
+            <div class="metrics">
+                <div class="metric">
+                    <div class="metric-weight">w=0.60</div>
+                    <div class="metric-label">Stress rivi\u00e8res</div>
+                    <div class="metric-val" style="color:${C.blue}">${bws.toFixed(3)}</div>
+                    <div class="metric-bar"><div class="metric-fill" style="width:${bws*100}%;background:${C.blue}"></div></div>
+                    <div class="metric-src">Aqueduct + Pfister + BNPE</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-weight">w=0.25</div>
+                    <div class="metric-label">Stress nappes</div>
+                    <div class="metric-val" style="color:${C.purple}">${gws.toFixed(3)}</div>
+                    <div class="metric-bar"><div class="metric-fill" style="width:${gws*100}%;background:${C.purple}"></div></div>
+                    <div class="metric-src">Aqueduct + BRGM + Piezo</div>
+                </div>
+                <div class="metric">
+                    <div class="metric-weight">w=0.15</div>
+                    <div class="metric-label">Secheresse</div>
+                    <div class="metric-val" style="color:${C.orange}">${dr.toFixed(3)}</div>
+                    <div class="metric-bar"><div class="metric-fill" style="width:${dr*100}%;background:${C.orange}"></div></div>
+                    <div class="metric-src">ERA5 SPI-12</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts -->
+        <div style="margin-top:20px">
+            <div class="panel-title">Visualisation</div>
+
+            <!-- Monthly profile (primary chart) -->
+            <div class="chart-wrap" id="monthlyWrap" style="display:none">
+                <button class="chart-expand" onclick="toggleFullscreen(this)" title="Plein ecran">&#x26F6;</button>
+                <div class="chart-header">Profil saisonnier ${d.query.year||2022}</div>
+                <div class="chart-container lg"><canvas id="cMonthly"></canvas></div>
+            </div>
+
+            <!-- Waterfall -->
+            <div class="chart-wrap">
+                <div class="chart-header">D\u00e9composition du score</div>
+                <div class="chart-container md"><canvas id="cWater"></canvas></div>
+            </div>
+
+            <!-- Bar -->
+            <div class="chart-wrap">
+                <div class="chart-header">Contribution au stress</div>
+                <div class="chart-container sm"><canvas id="cBar"></canvas></div>
+            </div>
+            <!-- Radar -->
+            <div class="chart-wrap">
+                <div class="chart-header">Profil stress</div>
+                <div class="chart-container md"><canvas id="cRadar"></canvas></div>
+            </div>
+        </div>
+
+        <!-- Data table -->
+        <div style="margin-top:20px">
+            <div class="panel-title">Donnees brutes</div>
+            <table class="dtable">
+                <tr><th>Variable</th><th>Valeur</th></tr>
+                <tr><td>Water Score <span style="color:var(--text3);font-size:10px">(${modeLabel})</span></td><td style="color:${wsHex(ws)};font-weight:700">${ws.toFixed(1)}</td></tr>
+                <tr><td>WSI</td><td>${wsi.toFixed(4)}</td></tr>
+                <tr><td>Stress rivi\u00e8res (BWS)</td><td>${bws.toFixed(4)}</td></tr>
+                <tr><td>&nbsp;&nbsp;&rarr; contribution (&times;0.60)</td><td>${bws_w.toFixed(4)}</td></tr>
+                <tr><td>Stress nappes (GWS)</td><td>${gws.toFixed(4)}</td></tr>
+                <tr><td>&nbsp;&nbsp;&rarr; contribution (&times;0.25)</td><td>${gws_w.toFixed(4)}</td></tr>
+                <tr><td>Risque s\u00e9cheresse</td><td>${dr.toFixed(4)}</td></tr>
+                <tr><td>&nbsp;&nbsp;&rarr; contribution (&times;0.15)</td><td>${dr_w.toFixed(4)}</td></tr>
+                <tr><td>Incertitude (1&sigma;)</td><td>&plusmn;${(c.wsi_uncertainty||0).toFixed(4)}</td></tr>
+                <tr><td>WSI p10 / p90 <span style="color:var(--text3);font-size:10px">(annuel)</span></td><td>${(c.wsi_p10||0).toFixed(4)} / ${(c.wsi_p90||0).toFixed(4)}</td></tr>
+                ${d.seasonal ? `
+                <tr><td colspan="2" style="padding-top:8px;border-bottom:2px solid #1a1a1a;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:0.8px;color:var(--text3)">Scores saisonniers</td></tr>
+                <tr><td>Pire mois</td><td style="font-weight:600">${d.seasonal.worst_month_score != null ? d.seasonal.worst_month_score.toFixed(1) : '—'}</td></tr>
+                <tr><td>Moyenne ete (Jun-Sep)</td><td>${d.seasonal.summer_mean_score != null ? d.seasonal.summer_mean_score.toFixed(1) : '—'}</td></tr>
+                <tr><td>Amplitude saisonniere</td><td>${d.seasonal.worst_month_score != null ? (ws - d.seasonal.worst_month_score).toFixed(1) + ' pts' : '—'}</td></tr>
+                ` : ''}
+            </table>
+        </div>
+
+        <!-- Formula -->
+        <div style="margin-top:20px;margin-bottom:20px">
+            <div class="panel-title">Methodologie</div>
+            <div class="formula-block">
+WSI = 0.60 &times; Stress_rivi&egrave;res + 0.25 &times; Stress_nappes + 0.15 &times; S&eacute;cheresse
+WaterScore = 100 &times; (1 &minus; WSI)
+<div class="cite">Pfister et al. (2009) &middot; McKee et al. (1993) &middot; Aqueduct 4.0, WRI (2023)</div></div>
+        </div>
+    `;
+
+    // ── Charts — Matplotlib style ──
+    const gridC = '#e0e0e0';
+    const tickC = '#555555';
+    const mplOpts = {
+        borderColor: '#e0e0e0',
+        plugins: { legend: { labels: { font: { size: 10, family: "'IBM Plex Mono', monospace" }, color: tickC } } }
+    };
+
+    // Waterfall
+    if (cWater) cWater.destroy();
+    const w1 = 100, w2 = w1 - bws_w * 100, w3 = w2 - gws_w * 100, w4 = w3 - dr_w * 100;
+    cWater = new Chart(document.getElementById('cWater'), {
+        type: 'bar',
+        data: {
+            labels: ['Max', '\u2212 Rivi\u00e8res', '\u2212 Nappes', '\u2212 S\u00e9cheresse', 'Score'],
+            datasets: [
+                {
+                    data: [0, w2, w3, w4, 0],
+                    backgroundColor: 'transparent',
+                    borderWidth: 0,
+                    barPercentage: 0.5
+                },
+                {
+                    data: [w1, w1 - w2, w2 - w3, w3 - w4, ws],
+                    backgroundColor: ['#aaaaaa', C.blue, C.purple, C.orange, wsHex(ws)],
+                    borderColor: ['#888888', C.blue, C.purple, C.orange, wsHex(ws)],
+                    borderWidth: 1,
+                    borderRadius: 1,
+                    barPercentage: 0.5
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    stacked: true,
+                    grid: { display: false },
+                    ticks: { color: tickC, font: { size: 10 }, maxRotation: 0 },
+                    border: { color: '#1a1a1a' }
+                },
+                y: {
+                    stacked: true,
+                    beginAtZero: true,
+                    max: 100,
+                    grid: { color: gridC, lineWidth: 0.8 },
+                    ticks: { color: tickC, font: { size: 10 } },
+                    border: { color: '#1a1a1a' }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    filter: ctx => ctx.datasetIndex === 1,
+                    callbacks: { label: ctx => ctx.parsed.y.toFixed(1) + ' pts' },
+                    backgroundColor: '#1a1a1a',
+                    titleFont: { family: "'IBM Plex Mono', monospace", size: 11 },
+                    bodyFont: { family: "'IBM Plex Mono', monospace", size: 11 },
+                    cornerRadius: 2,
+                    padding: 8
+                },
+                datalabels: {
+                    display: ctx => ctx.datasetIndex === 1,
+                    color: '#1a1a1a',
+                    anchor: 'end',
+                    align: 'end',
+                    font: { size: 11, weight: 'bold', family: "'IBM Plex Mono', monospace" },
+                    formatter: (value, ctx) => {
+                        if (ctx.dataIndex === 0) return value.toFixed(0);
+                        if (ctx.dataIndex === 4) return value.toFixed(0);
+                        return '\u2212' + value.toFixed(1);
+                    }
+                }
+            }
+        }
+    });
+
+    // Bar contributions
+    if (cBar) cBar.destroy();
+    cBar = new Chart(document.getElementById('cBar'), {
+        type: 'bar',
+        data: {
+            labels: ['Stress rivi\u00e8res', 'Stress nappes', 'S\u00e9cheresse'],
+            datasets: [
+                {
+                    label: 'Brut',
+                    data: [bws, gws, dr],
+                    backgroundColor: [C.blue + '33', C.purple + '33', C.orange + '33'],
+                    borderColor: [C.blue, C.purple, C.orange],
+                    borderWidth: 1.5
+                },
+                {
+                    label: 'Pondere',
+                    data: [bws_w, gws_w, dr_w],
+                    backgroundColor: [C.blue, C.purple, C.orange],
+                    borderColor: [C.blue, C.purple, C.orange],
+                    borderWidth: 1
+                }
+            ]
+        },
+        options: {
+            indexAxis: 'y',
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    beginAtZero: true,
+                    grid: { color: gridC, lineWidth: 0.8 },
+                    ticks: { color: tickC, font: { size: 10 } },
+                    border: { color: '#1a1a1a' }
+                },
+                y: {
+                    grid: { display: false },
+                    ticks: { color: '#1a1a1a', font: { weight: '600', size: 11 } },
+                    border: { color: '#1a1a1a' }
+                }
+            },
+            plugins: {
+                legend: {
+                    labels: { font: { size: 9 }, color: tickC, boxWidth: 10 },
+                    position: 'bottom'
+                },
+                tooltip: {
+                    backgroundColor: '#1a1a1a',
+                    titleFont: { family: "'IBM Plex Mono', monospace", size: 11 },
+                    bodyFont: { family: "'IBM Plex Mono', monospace", size: 11 },
+                    cornerRadius: 2
+                }
+            }
+        }
+    });
+
+    // Radar
+    if (cRadar) cRadar.destroy();
+    cRadar = new Chart(document.getElementById('cRadar'), {
+        type: 'radar',
+        data: {
+            labels: ['Stress rivi\u00e8res', 'Stress nappes', 'S\u00e9cheresse'],
+            datasets: [{
+                data: [bws, gws, dr],
+                backgroundColor: 'rgba(31,119,180,0.10)',
+                borderColor: C.blue,
+                borderWidth: 2,
+                pointBackgroundColor: C.blue,
+                pointRadius: 4,
+                pointBorderColor: '#ffffff',
+                pointBorderWidth: 1.5
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 1,
+                    grid: { color: '#e0e0e0', lineWidth: 0.8 },
+                    angleLines: { color: '#e0e0e0', lineWidth: 0.8 },
+                    pointLabels: {
+                        font: { size: 11, weight: '600', family: "'IBM Plex Mono', monospace" },
+                        color: '#1a1a1a'
+                    },
+                    ticks: {
+                        stepSize: 0.25,
+                        font: { size: 9 },
+                        color: tickC,
+                        backdropColor: 'transparent'
+                    }
+                }
+            },
+            plugins: {
+                legend: { display: false },
+                tooltip: {
+                    backgroundColor: '#1a1a1a',
+                    bodyFont: { family: "'IBM Plex Mono', monospace", size: 11 },
+                    cornerRadius: 2
+                }
+            }
+        }
+    });
+
+    // ── Monthly profile chart ──
+    loadMonthlyProfile(d.query.lat, d.query.lon);
+}
+
+async function loadMonthlyProfile(lat, lon) {
+    const wrap = document.getElementById('monthlyWrap');
+    try {
+        const r = await fetch(`/api/monthly?lat=${lat}&lon=${lon}`);
+        const data = await r.json();
+        if (data.error || !data.months || data.warning) {
+            wrap.style.display = 'none';
+            return;
+        }
+        wrap.style.display = 'block';
+
+        const labels = data.months.map(m => ['Jan','Fev','Mar','Avr','Mai','Jun','Jul','Aou','Sep','Oct','Nov','Dec'][m.month - 1]);
+        const scores = data.months.map(m => m.water_score);
+        const droughts = data.months.map(m => m.drought_norm != null ? m.drought_norm * 100 : null);
+
+        // Highlight selected month
+        const selMonth = currentMonth ? +currentMonth : 0;
+        const bgColors = scores.map((s, i) => {
+            if (selMonth && data.months[i].month === selMonth) return wsHex(s);
+            return wsHex(s) + '66';
+        });
+        const borderColors = scores.map(s => wsHex(s));
+
+        if (cMonthly) cMonthly.destroy();
+        cMonthly = new Chart(document.getElementById('cMonthly'), {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Water Score',
+                        data: scores,
+                        backgroundColor: bgColors,
+                        borderColor: borderColors,
+                        borderWidth: 1.5,
+                        borderRadius: 1,
+                        yAxisID: 'y',
+                        order: 2,
+                    },
+                    {
+                        label: 'Risque s\u00e9cheresse',
+                        data: droughts,
+                        type: 'line',
+                        borderColor: C.orange,
+                        backgroundColor: C.orange + '22',
+                        fill: true,
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointBackgroundColor: C.orange,
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 1.5,
+                        borderWidth: 2,
+                        yAxisID: 'y2',
+                        order: 1,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#555', font: { size: 10 }, maxRotation: 0 },
+                        border: { color: '#1a1a1a' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        position: 'left',
+                        title: { display: true, text: 'Score', font: { size: 10 }, color: '#555' },
+                        grid: { color: '#e0e0e0', lineWidth: 0.8 },
+                        ticks: { color: '#555', font: { size: 10 } },
+                        border: { color: '#1a1a1a' }
+                    },
+                    y2: {
+                        beginAtZero: true,
+                        max: 100,
+                        position: 'right',
+                        title: { display: true, text: 'S\u00e9cheresse %', font: { size: 10 }, color: C.orange },
+                        grid: { display: false },
+                        ticks: { color: C.orange, font: { size: 10 } },
+                        border: { color: C.orange }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        labels: { font: { size: 9 }, color: '#555', boxWidth: 10 },
+                        position: 'bottom'
+                    },
+                    tooltip: {
+                        backgroundColor: '#1a1a1a',
+                        titleFont: { family: "'IBM Plex Mono', monospace", size: 11 },
+                        bodyFont: { family: "'IBM Plex Mono', monospace", size: 11 },
+                        cornerRadius: 2,
+                        callbacks: {
+                            label: ctx => {
+                                if (ctx.dataset.label === 'Water Score') return 'Score: ' + ctx.parsed.y.toFixed(1);
+                                return 'S\u00e9cheresse: ' + ctx.parsed.y.toFixed(1) + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+        // Add annual reference line annotation
+        if (data.annual && data.annual.water_score != null) {
+            const annualY = data.annual.water_score;
+            cMonthly.options.plugins.annotation = {
+                annotations: {
+                    line1: {
+                        type: 'line', yMin: annualY, yMax: annualY,
+                        borderColor: '#888', borderWidth: 1, borderDash: [4, 4],
+                        label: { content: 'Annuel: ' + annualY.toFixed(1), enabled: true, position: 'end', font: { size: 9 } }
+                    }
+                }
+            };
+            cMonthly.update();
+        }
+    } catch (e) {
+        wrap.style.display = 'none';
+    }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,401 @@
+# A Composite Index for Territorial Water Stress Assessment: Application to Data Center Siting in France
+
+**Alexis Fabre**
+Olara — Paris, France
+
+---
+
+## Abstract
+
+Siting decisions for data centers increasingly depend on anticipating local water constraints, yet no operational index exists that combines structural water scarcity with short-term drought dynamics at the territorial scale. We propose $H_{\text{local}}(x,t)$, a composite score in $[0,1]$ that blends a structural component (baseline water stress, groundwater stress, aridity) with a conjunctural component (standardized precipitation-evapotranspiration anomalies at 3- and 12-month windows). Three design choices distinguish this index from existing approaches: (i) an asymptotic mapping of SPEI values that avoids hard saturation during generalized drought, (ii) a dynamic weighting parameter $\beta(t)$ that shifts influence toward the conjunctural signal as crisis intensifies, and (iii) a smooth maximum (softmax with $\tau=5$) for combining multi-scale drought signals. We evaluate the index on 8 candidate sites across metropolitan France over three contrasting summers (2015, 2018, 2022). The index passes all physical coherence tests (NW$\to$SE gradient, 3/3 years), achieves moderate concordance with prefectural drought restrictions ($\rho=0.457$, 70% pairwise concordance), and demonstrates ranking stability across 14 parameter perturbations (top/bottom sites stable at 86–100%). A one-at-a-time sensitivity analysis confirms that only two parameters—the asymptotic mapping constant $c$ and the dynamic $\beta$ switch—materially affect the score, both being documented design choices rather than arbitrary constants. The index is designed as a screening tool for site selection, not as a hydrological model, and its limitations—expert-set weights, 25 km resolution, absence of local demand—are discussed.
+
+**Keywords:** water stress, data center, SPEI, composite index, site selection, drought
+
+---
+
+## 1. Introduction
+
+### 1.1 Context
+
+The growth of hyperscale data centers in Europe has intensified scrutiny of their environmental footprint, particularly water consumption for cooling (Mytton, 2021; Shehabi et al., 2016). While power usage effectiveness (PUE) and carbon intensity are well-documented metrics, water usage effectiveness (WUE) and, more broadly, the territorial water constraint at a candidate site remain poorly quantified at the decision stage.
+
+Water availability at a location depends on two distinct dynamics. The first is **structural**: the long-term balance between supply and demand, shaped by climate, hydrology, and existing withdrawals. The second is **conjunctural**: the transient departure from that baseline caused by meteorological drought, which can render an otherwise comfortable location untenable for months. Current approaches to water risk assessment—notably the WRI Aqueduct framework (Hofste et al., 2019)—provide static structural indicators but do not capture conjunctural dynamics. Conversely, drought indices such as SPEI (Vicente-Serrano et al., 2010) quantify anomalies relative to local climatology but say nothing about the absolute level of structural scarcity.
+
+### 1.2 Objective
+
+We propose $H_{\text{local}}(x,t) \in [0,1]$, a composite territorial water stress score that integrates structural and conjunctural signals into a single, interpretable metric for data center siting. The score is designed to be:
+
+- **Physically grounded**: each component traces to a published indicator with known properties;
+- **Temporally dynamic**: the score changes month-to-month as drought conditions evolve;
+- **Robust**: the site ranking is stable under plausible parameter perturbations;
+- **Honest about its limits**: it is a screening tool, not a hydrological model.
+
+### 1.3 Related work
+
+Aqueduct 4.0 (Hofste et al., 2019) provides global rasters of baseline water stress (BWS) and groundwater stress (GWS) at ~5 km resolution, but these are static annual means. The SPEI (Vicente-Serrano et al., 2010; Beguería et al., 2014) extends the classical SPI by incorporating potential evapotranspiration, yielding a standardized anomaly suitable for cross-site comparison. The UNEP aridity index (UNEP, 1992; Middleton & Thomas, 1997) classifies climates by the ratio of precipitation to potential evapotranspiration. Our contribution lies not in the individual indicators but in their assembly into a single operational score with adaptive weighting and non-saturating transformations.
+
+---
+
+## 2. Data
+
+### 2.1 ERA5 reanalysis
+
+Monthly precipitation ($P$) and potential evapotranspiration ($PET$) are extracted from ERA5 (Hersbach et al., 2020) at 0.25° resolution (~25 km) over the period 1981–2022 (504 months). $PET$ is derived from the ERA5 variable `pev` (potential evaporation, sign-reversed).
+
+**Coastal pixel correction.** ERA5 grid cells along coastlines mix land and sea fractions, depressing $PET$ estimates. We detect coastal pixels as those where the center-cell $PET$ in July falls below 60% of the maximum $PET$ in the surrounding 3×3 neighborhood, then reroute to the continental neighbor with highest $PET$. This correction affects Marseille (43.30°N, 5.37°E $\to$ 43.50°N, 5.00°E) and Montpellier (43.61°N, 3.88°E $\to$ 43.75°N, 4.25°E).
+
+### 2.2 WRI Aqueduct 4.0
+
+Baseline Water Stress (BWS) and Groundwater Stress (GWS) rasters are extracted at each site. BWS measures the ratio of total withdrawals to available renewable surface water; GWS measures the ratio of groundwater withdrawals to recharge. Both are static, representing long-term annual means.
+
+### 2.3 Study sites
+
+We evaluate the index on 8 metropolitan French sites spanning a NW–SE climatic gradient:
+
+| Site | Latitude | Longitude | Climate zone |
+|------|----------|-----------|--------------|
+| Brest | 48.39°N | 4.49°W | Oceanic |
+| Rennes | 48.11°N | 1.68°W | Oceanic |
+| Paris-Saclay | 48.73°N | 2.17°E | Oceanic degraded |
+| Strasbourg | 48.57°N | 7.75°E | Semi-continental |
+| Bordeaux | 44.84°N | 0.58°W | Oceanic/aquitain |
+| Lyon | 45.76°N | 4.83°E | Continental |
+| Montpellier | 43.61°N | 3.88°E | Mediterranean |
+| Marseille | 43.30°N | 5.37°E | Mediterranean |
+
+### 2.4 Validation data
+
+Prefectural drought restrictions (Propluvia/VigiEau) for July 2022 provide an external reference. Four levels are defined: Vigilance (1), Alerte (2), Alerte renforcée (3), and Crise (4). These are administrative decisions integrating hydrological, agricultural, and political factors.
+
+---
+
+## 3. Methods
+
+### 3.1 Model architecture
+
+The score decomposes into a structural block and a conjunctural block:
+
+$$H_{\text{local}}(x,t) = \beta(t) \cdot S_{\text{struct}}(x) + \bigl(1-\beta(t)\bigr) \cdot S_{\text{conj}}(x,t)$$
+
+where $\beta(t) = \beta_0 \cdot (1 - S_{\text{conj}})$ is a dynamic weighting parameter. When $S_{\text{conj}} \approx 0$ (no drought), $\beta(t) \approx \beta_0 = 0.70$ and structural factors dominate. When $S_{\text{conj}} \to 1$ (severe drought), $\beta(t) \to 0$ and the conjunctural signal takes over.
+
+### 3.2 Structural component
+
+$$S_{\text{struct}}(x) = \alpha_B \cdot b(x) + \alpha_A \cdot A(x) + \alpha_G \cdot g(x)$$
+
+with $\alpha_B = 0.50$, $\alpha_A = 0.36$, $\alpha_G = 0.14$ (expert-assigned, not calibrated).
+
+**Baseline Water Stress.** Raw BWS values from Aqueduct are rescaled on the France-specific range:
+
+$$b(x) = \text{clip}\left(\frac{\text{BWS}_{\text{raw}}(x)}{0.60},\; 0,\; 1\right)$$
+
+The denominator 0.60 represents the approximate maximum BWS observed across metropolitan France, replacing the global maximum of 5.0 used by Aqueduct. This rescaling amplifies the within-France variance from a range of 0.095 (global scale) to the full $[0,1]$ interval.
+
+**Aridity.** The UNEP aridity index $AI = P_{\text{annual}} / PET_{\text{annual}}$ is computed over the 1981–2010 baseline and transformed via a sigmoid:
+
+$$A(x) = \frac{1}{1 + (AI/0.65)^3}$$
+
+The midpoint $AI_{\text{mid}} = 0.65$ corresponds to the UNEP sub-humid dry threshold; the exponent $k=3$ produces a steep transition between humid ($A \approx 0$) and arid ($A \approx 1$) regimes while preserving sensitivity in the critical $[0.3, 1.0]$ range. This sigmoid is preferred over a linear mapping because the marginal increase in water risk is far greater when moving from $AI=0.5$ to $AI=0.3$ (entering semi-arid conditions) than from $AI=1.5$ to $AI=1.0$ (both comfortably humid).
+
+**Groundwater Stress.** Analogous to BWS:
+
+$$g(x) = \text{clip}\left(\frac{\text{GWS}_{\text{raw}}(x)}{0.15},\; 0,\; 1\right)$$
+
+The low weight ($\alpha_G = 0.14$) reflects that data centers do not typically draw directly from aquifers.
+
+### 3.3 Conjunctural component
+
+The SPEI (Standardized Precipitation-Evapotranspiration Index) is computed at two time scales:
+
+- **SPEI-12**: 12-month accumulated water balance, capturing deep, slow-onset drought;
+- **SPEI-3**: 3-month window, capturing rapid, recent deterioration.
+
+**SPEI computation.** Monthly water balance $D_i = P_i - PET_i$ is accumulated over a rolling $N$-month window. For each of the 12 calendar months, a log-logistic (Fisk) distribution is fitted to the accumulated values over the 1981–2010 baseline. The CDF value is then transformed to a standard normal deviate via $\text{SPEI} = \Phi^{-1}(F_{\text{fisk}}(D_{\text{acc}}))$. Fitting per calendar month (12 separate distributions) prevents conflating winter and summer climatologies.
+
+**Asymptotic stress mapping.** The raw SPEI value is transformed to a stress in $[0,1]$ via:
+
+$$f(\text{SPEI}) = \begin{cases} 0 & \text{if SPEI} \geq 0 \\ \dfrac{-\text{SPEI}}{c + |\text{SPEI}|} & \text{if SPEI} < 0 \end{cases}$$
+
+with $c = 2.0$. This mapping is asymptotic to 1 but never reaches it, preserving discrimination between sites even during generalized extreme drought ($\text{SPEI} < -3$). The alternative linear clip $f = \text{clip}(-\text{SPEI}/3, 0, 1)$, used in earlier versions, saturates at $\text{SPEI} = -3$, collapsing all severe droughts to $f = 1.0$ and destroying inter-site variance. Table 1 compares the two mappings.
+
+**Table 1.** SPEI-to-stress mapping comparison.
+
+| SPEI | Linear clip | Asymptotic ($c=2$) |
+|------|-------------|---------------------|
+| 0 | 0.00 | 0.00 |
+| −1 | 0.33 | 0.33 |
+| −2 | 0.67 | 0.50 |
+| −3 | **1.00** | 0.60 |
+| −4 | **1.00** | 0.67 |
+| −5 | **1.00** | 0.71 |
+
+**Smooth maximum.** The two drought signals are combined via a softmax:
+
+$$S_{\text{conj}} = \frac{d_{12} \cdot e^{\tau d_{12}} + d_3 \cdot e^{\tau d_3}}{e^{\tau d_{12}} + e^{\tau d_3}}$$
+
+with $\tau = 5$. As $\tau \to \infty$ this converges to $\max(d_{12}, d_3)$; as $\tau \to 0$ it converges to the arithmetic mean. The choice $\tau = 5$ provides a near-max behavior (Spearman $\rho = 0.976$ vs. hard max) while avoiding the discontinuity of the hard max.
+
+### 3.4 Dynamic weighting
+
+A fixed $\beta$ creates a structural floor: sites with low $S_{\text{struct}}$ (e.g., Lyon, $S_{\text{struct}} = 0.131$) cannot score above $\sim 0.40$ regardless of conjunctural severity, because 70% of their score is anchored to a low structural value. This contradicts reality: Lyon was under Crise restrictions in July 2022.
+
+The dynamic formulation:
+
+$$\beta(t) = \beta_0 \cdot (1 - S_{\text{conj}})$$
+
+reduces structural influence proportionally to conjunctural severity. In calm conditions ($S_{\text{conj}} \approx 0$), $\beta(t) \approx 0.70$; during crisis ($S_{\text{conj}} \approx 0.70$), $\beta(t) \approx 0.21$.
+
+### 3.5 Parameters
+
+All parameters are expert-assigned and not calibrated against observations. Table 2 summarizes the model configuration.
+
+**Table 2.** Model parameters.
+
+| Parameter | Symbol | Value | Source/justification |
+|-----------|--------|-------|---------------------|
+| Structural base weight | $\beta_0$ | 0.70 | Expert judgment |
+| BWS weight | $\alpha_B$ | 0.50 | Dominant surface indicator |
+| Aridity weight | $\alpha_A$ | 0.36 | Climate baseline |
+| GWS weight | $\alpha_G$ | 0.14 | Secondary, indirect |
+| BWS normalization | $BWS_{\max}$ | 0.60 | France observed max |
+| GWS normalization | $GWS_{\max}$ | 0.15 | France observed max |
+| Aridity sigmoid midpoint | $AI_{\text{mid}}$ | 0.65 | UNEP sub-humid threshold |
+| Aridity sigmoid exponent | $k$ | 3.0 | Expert judgment |
+| Asymptotic mapping constant | $c$ | 2.0 | Sensitivity analysis |
+| Softmax temperature | $\tau$ | 5.0 | Sensitivity analysis |
+
+---
+
+## 4. Results
+
+### 4.1 Score overview
+
+Table 3 presents the complete $H_{\text{local}}$ matrix across 8 sites and 3 contrasting years.
+
+**Table 3.** $H_{\text{local}}(x,t)$ for all sites and validation years.
+
+| Site | 2015 (normal) | 2018 (heat wave) | 2022 (drought) |
+|------|--------------|-----------------|----------------|
+| Marseille | 0.718 | 0.586 | 0.635 |
+| Paris-Saclay | 0.573 | 0.436 | 0.563 |
+| Strasbourg | 0.544 | 0.543 | 0.536 |
+| Montpellier | 0.449 | 0.267 | 0.637 |
+| Lyon | 0.436 | 0.175 | 0.585 |
+| Bordeaux | 0.401 | 0.217 | 0.401 |
+| Rennes | 0.249 | 0.217 | 0.426 |
+| Brest | 0.177 | 0.261 | 0.362 |
+| **Mean** | **0.443** | **0.338** | **0.518** |
+
+The temporal pattern is coherent: 2018 (localized heat wave, not a generalized drought) yields the lowest mean score (0.338), while 2022 (historic drought) yields the highest (0.518). The 2015 normal year produces an intermediate mean (0.443) due to moderate drought conditions in the Paris–Lyon corridor that summer.
+
+### 4.2 Physical coherence
+
+**NW–SE gradient.** France exhibits a well-known climatic gradient from oceanic northwest to Mediterranean southeast. The index captures this gradient across all three years (Table 4).
+
+**Table 4.** NW–SE gradient (NW = Brest, Rennes; SE = Marseille, Montpellier, Lyon).
+
+| Year | $\bar{H}_{\text{NW}}$ | $\bar{H}_{\text{SE}}$ | Ratio | Pass |
+|------|----------------------|----------------------|-------|------|
+| 2015 | 0.213 | 0.534 | 2.51× | Yes |
+| 2018 | 0.239 | 0.343 | 1.43× | Yes |
+| 2022 | 0.394 | 0.619 | 1.57× | Yes |
+
+**Marseille vs. Brest.** The most structurally contrasted pair confirms that the Mediterranean site consistently outscores the oceanic site: $\Delta = +0.541$ (2015), $+0.326$ (2018), $+0.274$ (2022).
+
+### 4.3 Decomposition
+
+The dynamic $\beta$ produces interpretable contribution shifts (Table 5).
+
+**Table 5.** Mean contribution of structural vs. conjunctural components.
+
+| Year | $\%_{\text{struct}}$ | $\%_{\text{conj}}$ | Interpretation |
+|------|---------------------|--------------------|----|
+| 2015 | 32% | 68% | Moderate drought in south → conj dominates |
+| 2018 | 64% | 36% | Localized heat → structure discriminates |
+| 2022 | 20% | 80% | Generalized drought → conj takes over |
+
+In 2018, four sites (Marseille, Rennes, Bordeaux, Montpellier) have $S_{\text{conj}} = 0$ (SPEI $\geq 0$), so their score is driven entirely by $S_{\text{struct}}$. In 2022, all sites are under drought, the conjunctural signal is strong everywhere, and $\beta(t)$ drops to 0.21–0.38, allowing the conjunctural differences to determine the ranking.
+
+### 4.4 External validation: Propluvia
+
+Comparison with July 2022 prefectural drought restriction levels yields a Spearman rank correlation $\rho = 0.457$ ($p = 0.255$) and 70% pairwise concordance (16/23 pairs concordant). The seven discordant pairs concentrate on three patterns:
+
+1. **Rennes** ($H = 0.426$, Crise): the model underestimates Rennes because its structural profile (oceanic climate, moderate BWS) pulls the score down. The Crise declaration reflects local agricultural water demand, not captured by the physical index.
+
+2. **Montpellier** ($H = 0.637$, Alerte renforcée = 3): the model slightly overranks Montpellier relative to Lyon ($H = 0.585$, Crise = 4) and Marseille ($H = 0.635$, Crise = 4). The Montpellier–Marseille gap is negligible ($\Delta = 0.002$).
+
+3. **Paris-Saclay and Strasbourg** ($H > 0.53$, Alerte = 2): scored higher than Bordeaux ($H = 0.40$, Alerte renforcée = 3), reflecting SPEI-driven stress that does not translate to higher administrative restrictions in Île-de-France.
+
+The moderate correlation is expected: Propluvia decisions integrate non-hydrological factors (agricultural pressure, local reserves, political considerations) that a physical index cannot capture. Nevertheless, the index correctly identifies the extremes (Marseille/Montpellier at the top, Brest at the bottom) and captures the generalized shift between calm and crisis years.
+
+### 4.5 Sensitivity analysis
+
+#### 4.5.1 One-at-a-time perturbation
+
+Table 6 summarizes the sensitivity of mean $H$ to each parameter, measured as the range of $\Delta\bar{H}$ when perturbing each parameter across its plausible domain.
+
+**Table 6.** Parameter sensitivity (July 2022, 8 sites).
+
+| Parameter | Perturbation range | $\Delta\bar{H}_{\min}$ | $\Delta\bar{H}_{\max}$ | Sensitive? |
+|-----------|-------------------|----------------------|----------------------|------------|
+| $c$ (asymptotic) | [0.5, 5.0] | −0.157 | +0.259 | **Yes** |
+| $\beta$ dynamic OFF | fixed vs. dynamic | −0.112 | 0.000 | **Yes** |
+| $\tau$ (softmax) | [0, 50] | −0.028 | +0.024 | No |
+| $BWS_{\max}$ | [0.30, 1.00] | −0.017 | +0.031 | No |
+| $\beta_0$ | [0.50, 0.90] | −0.018 | +0.018 | No |
+| $k_{\text{arid}}$ | [1, 8] | −0.008 | +0.012 | No |
+| $GWS_{\max}$ | [0.10, 0.50] | −0.015 | +0.003 | No |
+| $\alpha$ (BWS dom.) | — | −0.005 | 0.000 | No |
+| $\alpha$ (Arid dom.) | — | 0.000 | +0.003 | No |
+
+Only two parameters materially affect the score: the asymptotic mapping constant $c$ and the dynamic $\beta$ switch. Both are documented design choices with physical justification, not arbitrary knobs. The remaining 7 parameters are robust: perturbing them across wide ranges changes the mean score by less than ±0.03.
+
+#### 4.5.2 Ranking stability at the extremes
+
+We ask: do the most and least constrained sites remain stable under parameter perturbation? Table 7 reports the frequency with which each site occupies the top-1 and bottom-1 positions across 14 parameter configurations.
+
+**Table 7.** Ranking stability (July 2022, 14 perturbations).
+
+| Position | Site | Frequency |
+|----------|------|-----------|
+| Top 1 (most constrained) | Montpellier | 50% |
+| | Marseille | 50% |
+| Top 3 | Montpellier | 100% |
+| | Marseille | 100% |
+| | Lyon | 86% |
+| Bottom 1 (least constrained) | Brest | 93% |
+| Bottom 3 | Brest | 100% |
+| | Rennes | 93% |
+| | Bordeaux | 93% |
+
+The extremes are highly stable. The top-1 alternates between Montpellier and Marseille, which differ by only $\Delta H = 0.002$. The bottom-3 (Brest, Rennes, Bordeaux) are nearly invariant.
+
+For 2015 (normal year), stability is even stronger: Marseille holds top-1 at 100%, Brest holds bottom-1 at 100%.
+
+#### 4.5.3 Impact of dynamic $\beta$ on decisions
+
+To quantify the operational impact of the dynamic $\beta$, we define four severity categories: Faible ($H < 0.33$), Modéré ($0.33 \leq H < 0.55$), Élevé ($0.55 \leq H < 0.75$), Critique ($H \geq 0.75$). Table 8 reports category changes when switching from dynamic to fixed $\beta$.
+
+**Table 8.** Category changes, dynamic vs. fixed $\beta$.
+
+| Year | Sites changing category | Example |
+|------|------------------------|---------|
+| 2015 | 3/8 | Lyon: Faible → Modéré (+0.17) |
+| 2018 | 0/8 | No changes |
+| 2022 | 5/8 | Lyon: Faible → Élevé (+0.28) |
+
+In 2022, the dynamic $\beta$ moves 5 of 8 sites to a higher severity category. The largest shift is Lyon ($+0.282$), jumping two categories. The fixed $\beta$ locks Lyon at $H = 0.303$ (Faible) despite a SPEI-12 of $-1.30$ and $S_{\text{conj}} = 0.704$, because its low $S_{\text{struct}} = 0.131$ dominates 70% of the score. The dynamic $\beta$ reduces this structural anchoring to $\beta(t) = 0.207$, allowing the crisis signal to express.
+
+In 2018, the dynamic $\beta$ changes no categories, confirming that it activates only during genuine widespread crisis.
+
+---
+
+## 5. Discussion
+
+### 5.1 What the index captures
+
+$H_{\text{local}}$ captures the climatic gradient of territorial water constraint across metropolitan France, correctly ranking Mediterranean sites above oceanic sites across all years tested. The dynamic weighting allows the score to shift between a structural reading (useful for long-term planning) and a crisis reading (useful for operational monitoring) without manual intervention.
+
+### 5.2 What the index does not capture
+
+The moderate Propluvia concordance ($\rho = 0.457$) reveals structural limitations:
+
+1. **Local demand and usage patterns.** Rennes is classified Crise by Propluvia despite moderate physical stress, reflecting intense agricultural water demand in Brittany. The index measures physical supply-side constraint, not demand-side vulnerability.
+
+2. **Infrastructure and resilience.** Local storage capacity, inter-basin transfers, and groundwater accessibility modulate real-world outcomes but are absent from the index.
+
+3. **Administrative discretion.** Prefectural decisions integrate political and economic factors beyond hydrology. Perfect concordance with Propluvia is neither expected nor desirable for a physical index.
+
+### 5.3 Limitations
+
+- **Expert weights.** The 10 model parameters are not calibrated against observations. The sensitivity analysis shows that 8 of 10 are robust, but the two sensitive ones ($c$, dynamic $\beta$) rely on physical reasoning rather than optimization.
+
+- **Spatial resolution.** ERA5 at 0.25° (~25 km) cannot capture sub-departmental variability. ERA5-Land (0.1°) or SAFRAN (8 km) would improve resolution for France.
+
+- **Static structural indicators.** BWS and GWS from Aqueduct are long-term means. Seasonal or interannual variability in withdrawals is not captured.
+
+- **No demand layer.** The index measures territorial water constraint, not operational risk to a data center. Integrating a demand layer (cooling requirements, alternative water sources) would convert $H_{\text{local}}$ from a screening score to a risk score.
+
+- **8 sites.** The validation set is small. Extending to 50+ sites with Propluvia data across multiple years would strengthen the external validation.
+
+### 5.4 Comparison to linear clip mapping
+
+The asymptotic mapping $f(\text{SPEI}) = -\text{SPEI}/(c + |\text{SPEI}|)$ was introduced to address saturation of the linear clip during the 2022 drought, when 4 of 8 sites had $S_{\text{conj}} = 1.0$ under the clip mapping. Switching to the asymptotic formulation improved Propluvia concordance from $\rho = 0.235$ (61% concordance) to $\rho = 0.457$ (70% concordance) and resolved a gradient inversion for 2018 that the clip mapping failed.
+
+---
+
+## 6. Conclusion
+
+We have presented $H_{\text{local}}(x,t)$, a composite water stress index for territorial screening of data center locations. The index integrates structural water scarcity (BWS, aridity, GWS) with dynamic drought anomalies (SPEI-12, SPEI-3) through an adaptive weighting mechanism that responds to crisis intensity.
+
+The three principal design innovations—asymptotic SPEI mapping, dynamic $\beta$, and softmax combination—each address specific failure modes of simpler formulations: saturation during extreme drought, structural anchoring during crisis, and discontinuity at the drought-scale boundary, respectively.
+
+The index demonstrates physical coherence (3/3 gradient tests passed), moderate external concordance ($\rho = 0.457$ with Propluvia), and robust ranking stability (top/bottom sites stable at 86–100% across 14 perturbations). Its limitations—expert weights, coarse resolution, absent demand layer—are inherent to its role as a first-pass screening tool.
+
+Future work should address three priorities: (i) integrating a data center water demand model to convert the territorial constraint into an operational risk score; (ii) increasing spatial resolution to ERA5-Land or SAFRAN; and (iii) projecting the index under CMIP6 climate scenarios for 2030–2050 site planning.
+
+---
+
+## References
+
+- Beguería, S., Vicente-Serrano, S. M., Reig, F., & Latorre, B. (2014). Standardized precipitation evapotranspiration index (SPEI) revisited: parameter fitting, evapotranspiration models, tools, datasets and drought monitoring. *International Journal of Climatology*, 34(10), 3001–3023.
+
+- Hersbach, H., Bell, B., Berrisford, P., et al. (2020). The ERA5 global reanalysis. *Quarterly Journal of the Royal Meteorological Society*, 146(730), 1999–2049.
+
+- Hofste, R. W., Reig, P., & Schleifer, L. (2019). Aqueduct 3.0: Updated decision-relevant global water risk indicators. *World Resources Institute Technical Note*.
+
+- Middleton, N., & Thomas, D. (1997). *World Atlas of Desertification*. UNEP, Arnold.
+
+- Mytton, D. (2021). Data centre water consumption. *npj Clean Water*, 4(1), 11.
+
+- Shehabi, A., Smith, S. J., Sartor, D. A., et al. (2016). *United States Data Center Energy Usage Report*. Lawrence Berkeley National Laboratory, LBNL-1005775.
+
+- UNEP (1992). *World Atlas of Desertification*. Edward Arnold.
+
+- Vicente-Serrano, S. M., Beguería, S., & López-Moreno, J. I. (2010). A multiscalar drought index sensitive to global warming: the standardized precipitation evapotranspiration index. *Journal of Climate*, 23(7), 1696–1718.
+
+---
+
+## Appendix A: Site parameters
+
+**Table A1.** Structural parameters per site.
+
+| Site | $BWS_{\text{raw}}$ | $b$ | $GWS_{\text{raw}}$ | $g$ | $AI$ | $A$ | $S_{\text{struct}}$ |
+|------|-----|------|------|------|------|------|------|
+| Marseille | 0.837 | 1.00* | 0.020 | 0.133 | 0.41 | 0.798 | 0.837 |
+| Montpellier | 0.382 | 0.637 | 0.060 | 0.400 | 0.63 | 0.509 | 0.382 |
+| Bordeaux | 0.310 | 0.516 | 0.040 | 0.267 | 1.23 | 0.088 | 0.310 |
+| Rennes | 0.311 | 0.518 | 0.040 | 0.267 | 1.48 | 0.048 | 0.311 |
+| Paris-Saclay | 0.275 | 0.458 | 0.110 | 0.733 | 0.72 | 0.302 | 0.290 |
+| Brest | 0.202 | 0.337 | 0.020 | 0.133 | 1.77 | 0.023 | 0.202 |
+| Strasbourg | 0.191 | 0.318 | 0.020 | 0.133 | 1.21 | 0.102 | 0.191 |
+| Lyon | 0.131 | 0.218 | 0.070 | 0.467 | 0.95 | 0.156 | 0.131 |
+
+*Clipped at 1.0.
+
+**Table A2.** SPEI values and conjunctural stress per site (July 2022).
+
+| Site | SPEI-12 | SPEI-3 | $d_{12}$ | $d_3$ | $S_{\text{conj}}$ |
+|------|---------|--------|----------|-------|-------------------|
+| Montpellier | −1.296 | −0.842 | 0.393 | 0.296 | 0.384 |
+| Lyon | −1.296 | −0.842 | 0.393 | 0.296 | 0.384 |
+| Paris-Saclay | −1.187 | −0.756 | 0.372 | 0.274 | 0.363 |
+| Strasbourg | −1.181 | −0.746 | 0.371 | 0.272 | 0.362 |
+| Marseille | −0.943 | −0.654 | 0.320 | 0.246 | 0.312 |
+| Rennes | −0.941 | −0.648 | 0.320 | 0.245 | 0.312 |
+| Brest | −0.863 | −0.512 | 0.301 | 0.204 | 0.293 |
+| Bordeaux | −0.752 | −0.418 | 0.273 | 0.173 | 0.267 |
+
+---
+
+## Appendix B: Figures
+
+The following figures are generated in the companion notebook `water_stress_H_local_executed.ipynb`:
+
+- **Fig. 2**: SPEI-to-stress mapping comparison (clip vs. asymptotic) and aridity sigmoid with site positions
+- **Fig. 3**: Map of France showing $H_{\text{local}}$ for 8 sites across 2015, 2018, 2022
+- **Fig. 4**: Stacked bar decomposition of structural and conjunctural contributions
+- **Fig. 5**: Heatmap of $H_{\text{local}}(x,t)$
+- **Fig. 6**: Scatter plot of $H$ vs. Propluvia levels with concordance matrix
+- **Fig. 8**: Tornado plot of parameter sensitivity
+- **Fig. 10**: Dot plot of $\beta$ dynamic vs. fixed effect on severity categories

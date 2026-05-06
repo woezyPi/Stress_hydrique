@@ -1,0 +1,16 @@
+numpy
+scipy
+pandas
+xarray
+netcdf4
+rasterio
+rioxarray
+geopandas
+shapely
+pyproj
+requests
+loguru
+pyyaml
+owslib
+fastapi
+uvicorn

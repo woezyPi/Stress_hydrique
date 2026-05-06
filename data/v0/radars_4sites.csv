@@ -1,0 +1,5 @@
+site,lat,lon,station,station_nom,f1,f2,f3,f4
+Paris-Saint-Denis,48.93,2.36,F700000102,La Seine à Paris - Austerlitz - station limni - secours CT,0.0,1.8,0.8295265360815595,0.0
+Marseille-L2,43.3,5.4,Y441403001,L'Huveaune à Roquevaire,0.0,1.0,-0.17637549884226467,0.0
+Tours,47.39,0.69,K671091001,Le Cher à Tours - Pont Saint-Sauveur,0.0,2.0,-0.3636355210180095,1.0
+Lyon-Venissieux,45.7,4.89,U472002001,,,,,
